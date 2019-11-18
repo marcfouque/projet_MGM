@@ -1,1 +1,15 @@
-//css
+/*css*/
+#chi{
+	height:150px;
+	width:200px;
+	position:absolute;
+	top:100px;
+	left:-190px;
+	z-index:-1;
+}
+body{
+	width:100%;
+	height:100%;
+	cursor:url("../resources/curseur32.png") 5 5,pointer;
+	
+}
