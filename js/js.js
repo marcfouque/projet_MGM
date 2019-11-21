@@ -18,5 +18,5 @@ $('#chi').ready(function(){
 			//$("#chi").css({ top:50px, left: 0px});
 			
 		}
-	}, 300);
+	}, 310);
 });

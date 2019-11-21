@@ -1,6 +1,6 @@
 <?php
-	define('NOM',"marfouque"); // login MySQL
-	define('PASSE',"ZWM79NHG"); // mot de passe MySQL
+	define('NOM',"root"); // login MySQL
+	define('PASSE',""); // mot de passe MySQL
 	define('SERVEUR',"localhost"); 	// addresse MySql
 	define('BASE',"16_L2_marfouque");// nom base de données
 	//tentative connexion à la base
