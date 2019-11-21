@@ -15,6 +15,10 @@
 		"nomPage3"=>[
 					"obligatoire"=>array(),
 					"facultatif"=>array("nomParamA","nomParamB")
-				]
+				],
+		"exempleForm"=>[
+					"obligatoire"=>array("numpat"),
+					"facultatif"=>array("dateNaiss","evian")
+				],
 	];
 ?>

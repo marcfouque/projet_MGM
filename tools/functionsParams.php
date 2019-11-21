@@ -7,18 +7,18 @@ function verifParams($nomPage,$params){
 
 	/*fonction verifiant la conformité des parametres (abscence,type,restriction)
 	retour
-		-	[0,string] si parametre manquant
+		-	[0,string erreur,NomParamManquant] si parametre manquant
 		-	[1,params] si bon
-		-	[2,string] si parametre errone
+		-	[2,string erreur,param,[NomParamManquant,ValeurErrone]] si parametre errone
 	*/
 
 	foreach ($obliFalc[$nomPage]["obligatoire"] as $obli) {
-		if(!isset($params[$obli]))return array(0,"Parametre manquant :".$obli);
+		if(!isset($params[$obli]) or strlen($params[$obli])==0)return array(0,"Parametre manquant :".$obli,$obli);
 	}
 	$listParamsPoss = array_merge($obliFalc[$nomPage]["obligatoire"],$obliFalc[$nomPage]["facultatif"]);
 	foreach ($listParamsPoss as $p){
 		if(isset($params[$p])){
-			if(!paramValid($p,$params[$p]))return array(2,"Parametre invalide :".$p);
+			if(!paramValid($p,$params[$p]))return array(2,"Parametre invalide :".$p,array($p,$params[$p]));
 		}
 	}
 	return array(1,recastParams($params));
@@ -26,9 +26,11 @@ function verifParams($nomPage,$params){
 
 function paramValid($clef,$valeur){
 		require "descParams.php";
+		/*
 		echo gettype($valeur);
 		echo is_string($valeur);
 		echo $valeur;
+		*/
 		switch ($parametres[$clef]["type"]) {
 			case "string":
 				if(!is_string($valeur)){return false;}

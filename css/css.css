@@ -1,15 +1,25 @@
 /*css*/
-#chi{
-	height:150px;
-	width:200px;
-	position:fixed;
-	bottom:-50px;
-	left:-190px;
-	z-index:-1;
-}
+
+/*balise html*/
 body{
 	width:100%;
 	height:100%;
 	cursor:url("../resources/curseur32.png") 5 5,pointer;
 	background-color:#FBFBFB;
+}
+
+/*id*/
+#chi{
+	height:150px;
+	width:200px;
+	position:fixed;
+	top:100px;
+	left:-190px;
+	z-index:-1;
+}
+
+/*classe*/
+.alertParam{
+	position:fixed;
+	bottom:0px;
 }
