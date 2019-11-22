@@ -10,7 +10,26 @@
 	
 	if($mesParams[0]==1){
 		$mesParams = $mesParams[1];
-		print '<p class="display-1"> yes we did it !!</p>';
+		/*
+		$requete = 'select * from patient;'
+		$req = $bdd->prepare($requete);
+		$req->execute(array(':p_user' => $_POST['utilisateur']));
+		$resultat = $req->fetch();
+		*/
+		
+		
+		/*
+		if($resultat){//verif si resultat
+			do {//iteration sur toutes les lignes
+				echo"<p>mmon resultatofjfiijeifhdihgdihsihgi $resultat</p>";
+			} while ($resultat = $req->fetch(););
+		}
+		else{
+			echo "<b>Erreur dans l'exécution de la requête ou zero resultat</b><br/>";
+			echo "<b>Message de mySQL: </b>".$req->errorInfo();
+		}
+		$req->closeCursor() ;
+		*/
 		print implode(" _ ",$mesParams);
 	}
 	else{
