@@ -3,7 +3,7 @@
 	require "tools/functionsPrint.php";
 	getStart();
 	?>
-<div class="card-deck">
+<div class="card-deck mx-auto w-50">
   <div class="card">
     <img src="resources/dossier.png" class="card-img-top" alt="logo dossier">
     <div class="card-body">
@@ -13,7 +13,7 @@
 	<ul class="list-group list-group-flush">
     <li class="list-group-item"> <a href="#" >Nouveau Traitement</a></li>
     <li class="list-group-item"><a href="#"  >Nouvel Examen</a></li>
-	<li class="list-group-item"><a href="#"  >Traitement à un Patient</a></li>
+		<li class="list-group-item"><a href="#"  >Traitement à un Patient</a></li>
 		<li class="list-group-item"><a href="#"  >Examen à un Patient</a></li>
   </ul>
   </div>
@@ -24,13 +24,13 @@
       <p class="card-text">Consulter ou modifier la base de données</p>
     </div>
 	  <ul class="list-group list-group-flush">
-    <li class="list-group-item"> <a href="pages/consulter/patient/consultpatient.php" >Patient</a></li>
-    <li class="list-group-item"><a href="#"  >Examen</a></li>
-      <li class="list-group-item"><a href="#"  >Centre</a></li>
-	      <li class="list-group-item"><a href="#"  >Traitement</a></li>
-  </ul>
+    	<li class="list-group-item"> <a href="pages/consulter/patient/consultpatient.php" >Patient</a></li>
+	    <li class="list-group-item"><a href="#"  >Examen</a></li>
+	    <li class="list-group-item"><a href="#"  >Centre</a></li>
+		  <li class="list-group-item"><a href="#"  >Traitement</a></li>
+  	</ul>
+	</div>
 </div>
-</div>
-  <?php 
+  <?php
   getEnd()
   ?>

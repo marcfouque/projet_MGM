@@ -1,4 +1,8 @@
-<?php 
+<?php
+#############################
+//Enumération des parametres obligatoires et falcutatifs par pages
+#############################
+
 	/*
 	-mettre un nom de page (unique) qui sera appelé dans le fichier php qui affichera la page
 	-mettre dans les array le nom des parametres obligatoire et/ou facultatif
