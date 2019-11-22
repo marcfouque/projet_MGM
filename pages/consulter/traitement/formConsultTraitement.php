@@ -1,7 +1,10 @@
+<!DOCTYPE Html>
+<html>
 <?php 
 		session_start(); 
 		require "../../../tools/functionsPrint.php";
 		getStart(3);
+		
 		//require "tools/connect.php";
 		/*
 		require "tools/functionsParams.php";
@@ -34,6 +37,14 @@
 		}
 		$req->closeCursor() ;
 		*/
-		echo "<h1>Formulaire consultation traitement</h1>";
+		echo "<h1>Rechercher un traitement</h1>";
+		?>
+
+	<form action = "scriptConsultationTraitement.php" method = "POST">
+	<label><input type = "text" name="user"></label></br>
+	<input type="submit" value="Rechercher">
+	</form>
+		<?php
 		getEnd(3);
 		?>
+</html>

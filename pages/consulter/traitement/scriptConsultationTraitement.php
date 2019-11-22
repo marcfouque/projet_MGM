@@ -3,8 +3,8 @@
 		//Script consultation traitement
 
 
-		//require "tools/connect.php";
-		/*
+		require "tools/connect.php";
+		
 		require "tools/functionsParams.php";
 		
 		$mesParams = verifParams("nomPage1",$_GET);
@@ -19,8 +19,8 @@
 			print implode(" _ ",$mesParams);
 		}
 		*/
-		/*
-		$requete = 'select * from patient;'
+		
+		$requete = 'select SELECT patient.NOM FROM patient INNER JOIN (rel_patient_traitement INNER JOIN ths_traitement on rel_patient_traitement.NUMTTT = ths_traitement.NUMTTT) ON patient.NUMPAT = rel_patient_traitement.NUMPAT WHERE LIBELLETTT like "'.trea"  from patient;'
 		$req = $bdd->prepare($requete);
 		$req->execute(array(':p_user' => $_POST['utilisateur']));
 		$resultat = $req->fetch();
@@ -34,6 +34,8 @@
 			echo "<b>Message de mySQL: </b>".$req->errorInfo();
 		}
 		$req->closeCursor() ;
-		*/
+		
 		echo "<h1>Script consultation traitement</h1>"
+		
+	
 		?>

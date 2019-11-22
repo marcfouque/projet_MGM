@@ -2788,7 +2788,7 @@ CREATE TABLE `rel_patient_traitement` (
   `NUMPAT` int(6) DEFAULT NULL,
   `NUMTTT` int(6) DEFAULT NULL,
   `DATEDEB` date NOT NULL,
-  `DATEFIN` date NOT NULL
+  `DATEFIN` date DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
