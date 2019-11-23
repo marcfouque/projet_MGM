@@ -25,6 +25,9 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+--constante pour cryptage mot de passe
+--
+--
 -- Structure de la table `patient`
 --
 
@@ -3569,6 +3572,33 @@ INSERT INTO `ths_traitement` (`NUMTTT`, `LIBELLETTT`) VALUES
 (44, 'VCR'),
 (45, 'Velbé'),
 (46, 'X');
+
+
+CREATE TABLE `utilisateur` (
+  `nomutilisateur` varchar(50) NOT NULL,
+  `motdepasseU` blob NOT NULL,
+  PRIMARY KEY (`nomutilisateur`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--gestion avec procedures triggers prevue
+--select aes_encrypt('marco','Evian&Chi1'), aes_decrypt(aes_encrypt('marco','Evian&Chi1'),'Evian&Chi1')
+
+--DELIMITER $$
+--CREATE PROCEDURE getClefk(OUT clef varchar(50))
+--  BEGIN
+--    Select 'Evian&Chi1';
+--  END$$
+--DELIMITER ;
+
+--
+--INSERT juste pour l'exmeple
+-- A NE PAS FAIRE (sécurité des données, mdp, et clefs)
+--
+INSERT INTO `utilisateur` (`nomutilisateur`, `motdepasseU`) VALUES
+('gregory', AES_ENCRYPT('marcesttropbeau','Evian&Chi1')),
+('manon', AES_ENCRYPT('marcestsuperbeau','Evian&Chi1')),
+('marc', AES_ENCRYPT('jemaime','Evian&Chi1'));
+
 
 --
 -- Index pour les tables déchargées

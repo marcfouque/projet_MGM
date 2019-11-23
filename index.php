@@ -25,7 +25,7 @@
     </div>
 	  <ul class="list-group list-group-flush">
     	<li class="list-group-item"> <a href="pages/consulter/patient/consultpatient.php" >Patient</a></li>
-	    <li class="list-group-item"><a href="#"  >Examen</a></li>
+	    <li class="list-group-item"><a href="pages/consulter/examen/formConsultExamen.php"  >Examen</a></li>
 	    <li class="list-group-item"><a href="#"  >Centre</a></li>
 		  <li class="list-group-item"><a href="#"  >Traitement</a></li>
   	</ul>

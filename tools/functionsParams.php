@@ -17,15 +17,21 @@ function verifParams($nomPage,$params){
 	}
 	//constitution d'un vecteurs de parametres obligatoires et facultatifs
 	$listParamsPoss = array_merge($obliFalc[$nomPage]["obligatoire"],$obliFalc[$nomPage]["facultatif"]);
+
+	//supression parametres vvides
+	$cleanParams = array_filter($params,'nonVide');
+	//print_r($cleanParams);
 	//boucle sur tous les params pour verifier leur validiter, retour 2 sinon
 	foreach ($listParamsPoss as $p){
-		if(isset($params[$p])){
-			if(!paramValid($p,$params[$p]))return array(2,"Parametre invalide :".$p,array($p,$params[$p]));
+		if(isset($cleanParams[$p])){
+			if(!paramValid($p,$cleanParams[$p]))return array(2,"Parametre invalide :".$p,array($p,$cleanParams[$p]));
 		}
 	}
 	//retour des parametres valides recasté
-	return array(1,recastParams($params));
+	return array(1,recastParams($cleanParams));
 }
+//check si la chaine donnée est n'est pas nulle
+function nonVide($s){return strlen($s)!=0;}
 
 function paramValid($clef,$valeur){
 	/*
@@ -92,10 +98,13 @@ function recastParams($params){
 	require "descParams.php";
 
 	$resultat = $params;
-	foreach(array_keys($resultat) as $clef){
-		if($parametres[$clef]["type"]=="entier")$resultat[$clef]=(integer)$resultat[$clef];
-		if($parametres[$clef]["type"]=="double")$resultat[$clef]=(double)$resultat[$clef];
-		if($parametres[$clef]["type"]=="booleen")$resultat[$clef]=(bool)$resultat[$clef];
+	foreach(array_keys($params) as $clef){
+		if(strlen($resultat[$clef])==0)unset($resultat[$clef]);
+		else{
+			if($parametres[$clef]["type"]=="entier")$resultat[$clef]=(integer)$resultat[$clef];
+			if($parametres[$clef]["type"]=="double")$resultat[$clef]=(double)$resultat[$clef];
+			if($parametres[$clef]["type"]=="booleen")$resultat[$clef]=(bool)$resultat[$clef];
+		}
 	}
     return $resultat;
 }

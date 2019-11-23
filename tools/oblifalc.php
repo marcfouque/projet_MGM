@@ -24,5 +24,9 @@
 					"obligatoire"=>array("numpat"),
 					"facultatif"=>array("dateNaiss","evian")
 				],
+		"consultExam"=>[
+					"obligatoire"=>array("choixreq"),
+					"facultatif"=>array("numexam","libexam","maxexam","minexam","datexam","numpat","resexam")
+				],
 	];
 ?>

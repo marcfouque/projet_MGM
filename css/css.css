@@ -17,6 +17,11 @@ body{
 	z-index:-1;
 }
 
+#formauthen{
+	right: 20px;
+
+}
+
 /*classe*/
 .alertParam{
 	position:fixed;

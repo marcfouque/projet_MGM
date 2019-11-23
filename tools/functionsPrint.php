@@ -1,11 +1,11 @@
 <?php
 /*fichier comportant différentes fonctions permettant de factoriser du code html (avec une mobilité des references).*/
-	
+
 
 	function getHead($granularite=0){
 		//fonction "printant" le <head> d'un fichier html.
 		//granularite niveau dans l'arborescence par rapport à la racine (granu = (nb slash entre fichier et projet_MGM) - 1)
-		
+
 		$prefix="";
 		for($i=0;$i<$granularite;$i++)$prefix.="../";
 		print'
@@ -14,21 +14,49 @@
 				<meta http-equiv="X-UA-Compatible" content="IE=edge">
 				<meta name="viewport" content="width=device-width, initial-scale=1">
 				<title>MGM Cohorte</title>
-				
+
 				<link rel="stylesheet" href="'.$prefix.'lib/bootstrap/css/bootstrap.min.css" />
 				<link rel="stylesheet" href="'.$prefix.'css/css.css"/>
-				
+
 				<link rel="icon" href="'.$prefix.'resources/faceFavicon.png">
 
-			  </head>				
+			  </head>
 		';
 	}
+
+	function getConnection($granularite=0){
+		//fonction "printant" le composant de connexion
+		//granularite niveau dans l'arborescence par rapport à la racine
+		$prefix="";
+		for($i=0;$i<$granularite;$i++)$prefix.="../";
+		if(!isset($_SESSION["coco"])){
+			print'
+					<form class="form-inline navbar-nav ml-auto" id="formauthen">
+					  <div class="form-group nav-item justify-content-end">
+							<input class="w-25 form-control" type="text" id="nomu" required placeholder="nom utilisateur" />
+							<input class="w-25 form-control" type="password"  id="motp" required placeholder="mot de passe" />
+						</div>
+						<button type="submit" class="btn btn-primary">Se Connecter</button>
+					</form>
+			';
+		}
+		else{
+			print'
+					<form class="form-inline navbar-nav ml-auto justify-content-end" id="formdeco">
+						<span>'.$_SESSION['coco'].'</span>
+						<button type="submit" class="btn btn-primary btn-outline-success">Se Deconnecter</button>
+					</form>
+			';
+		}
+	}
+
+
 	function getNav($granularite=0){
 		//fonction "printant" la bar de navigation
 		//granularite niveau dans l'arborescence par rapport à la racine
 		$prefix = "";
 		for($i=0;$i<$granularite;$i++)$prefix.="../";
-		print'	
+		print'
 			<nav class="navbar navbar-nav navbar-expand-lg navbar-light bg-light">
 				  <a class="navbar-brand" href="#"><img src="'.$prefix.'resources/ISPED-UBX_2019RVB.jpg" alt="logo ISPED UBordeaux"></a>
 				  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,50 +81,53 @@
 						  <a class="dropdown-item" href="#">Marc</a>
 						</div>
 					  </li>
-					</ul>
+					</ul>';
+			getConnection($granularite);
+			print'
 				  </div>
 				</nav>
 				<img src="'.$prefix.'resources/chi.gif" id="chi" style="width:200px;" >
 
 		';
-		
+
 	}
-	
+
+
 	function getStart($granularite=0){
 		//fonction "printant" le début d'un fichier html avec le <head> et la bar de navigation
 		//granularite niveau dans l'arborescence par rapport à la racine
-		
+
 		$prefix = "";
 		for($i=0;$i<$granularite;$i++)$prefix.="../";
-		
-		
-		print'	
+
+
+		print'
 			<!doctype html>
 			<html lang="fr">
 			  ';
-		getHead($granularite);	  
+		getHead($granularite);
 		print'
 			  <body>
 		';
 		getNav($granularite);
-		
+
 	}
-	
+
 	function getEnd($granularite=0){
 		//fonction "printant" la fin d'un fichier html avec les appels aux scripts js (bootstrap, jquery,...)
 		//granularite niveau dans l'arborescence par rapport à la racine
-		
+
 		$prefix = "";
 		for($i=0;$i<$granularite;$i++)$prefix.="../";
-		
-		
-		print'	
-			<script src="'.$prefix.'lib/jquery/jquery.js"></script>
+
+
+		print'
+			<script src="'.$prefix.'lib/jquery/jquery-3.4.1.min.js"></script>
 			<script src="'.$prefix.'lib/bootstrap/js/bootstrap.min.js"></script>
 			<script src="'.$prefix.'js/js.js"></script>
 		  </body>
 		</html>
 		';
-		
+
 	}
 ?>
