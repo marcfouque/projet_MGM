@@ -5,6 +5,7 @@
 
 	getStart(3);
 	echo'<h1>Consultation examens</h1>';
+		//si requete vierge
 	$mesParams = (count($_GET)==0?array(99,"0 parametre"):verifParams("consultExam",$_GET));
 
 	if($mesParams[0]==1){//si les parametres sont valides
@@ -16,7 +17,7 @@
 			"libexam"=>array('ths_examen.libellexam LIKE ',"libellé examen : "),
 			"maxexam"=>array('ths_examen.valmax = ',"valeur maximale de l'examen : "),
 			"minexam"=>array('ths_examen.valmin = ',"valeur minimale de l'examen : "),
-			"datexam"=>array('rel_patient_biologie.dateExamen = ',"date à  laquelle l'examen a été effectué : "),
+			"datexam"=>array('rel_patient_biologie.DatExam = ',"date à  laquelle l'examen a été effectué : "),
 			"numpat"=>array('rel_patient_biologie.numPat = ',"Numéro du patient : "),
 			"resexam"=>array('rel_patient_biologie.res = ',"Résultat de l'examen : ")
 		);
@@ -25,7 +26,7 @@
 		echo'<p>Parametre de la recherche : ';
 		foreach (array_keys($parCorresp) as $par){
 			if(isset($mesParams[$par])){
-				echo '<span class="text-muted">'.$parCorresp[$par][1].'<b class="text-muted">'.$mesParams[$par].'</b>, <span>';
+				echo '<span class="text-muted">'.$parCorresp[$par][1].'<b class="text-muted">'.$mesParams[$par].'</b>, </span>';
 			}
 		}
 		echo'</p>';
@@ -84,18 +85,138 @@
 		  </thead>
 			';
 
-			do {//iteration sur toutes les lignes
-				echo'<tr>';
-				for($i=0;$i<count($colonnes)-1;$i++)echo'<td>'.$resultat[$i].'</td>';
+			//pour stocker les modals
+			$modalsModif = "";
+			$modalsSupp = "";
 
+			do {//iteration sur toutes les lignes
+
+				$idunique = "";
+
+				echo'<tr>';
+				for($i=0;$i<count($colonnes)-1;$i++){
+					echo'<td>'.$resultat[$i].'</td>';
+					$idunique.=$resultat[$i];
+				}
+				$idunique = 'id'.str_replace(",","",str_replace("-","",$idunique));
 				print'
 				<td>
 					<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-					  <button type="button" class="btn btn-secondary">Modifier</button>
-					  <button type="button" class="btn btn-secondary">Supprimer</button>
+					  <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#'.$idunique.'modif" >Modifier</button>
+					  <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#'.$idunique.'supp" >Supprimer</button>
 					</div>
 				</td>
 				';
+
+				//pour l'apparition de la fenetre de modification (modalmodif)
+
+				$modalsModif.='
+				<div class="modal fade" id="'.$idunique.'modif" tabindex="-1" role="dialog" aria-labelledby="'.$idunique.'modifLabel" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="'.$idunique.'modifLabel">Modification</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<form class="container modal-body" action="../../modifier/examen/'.($mesParams["choixreq"]?'modifExamPat':'modifExamThs').'.php" method="get">
+									<div class="modal-body">							';
+					if($mesParams["choixreq"]){//ajout formulaire insert rel_patient_biologie
+						$modalsModif.='
+								<div class="form-group">
+									<label for="numexam" >Numéro de l\'examen</label>
+									<input type="number" class="form-control" name="numexam" placeholder="saisissez le numéro de l\'examen" value="'.$resultat[0].'" >
+							  </div>
+								<div class="form-group">
+									<label for="numpat" >Numéro du patient</label>
+									<input type="number" class="form-control" name="numpat" placeholder="numéro du patient" value="'.$resultat[4].'" >
+							  </div>
+								<div class="form-group">
+									<label for="datexam" >Date de l\'examen</label>
+									<input type="date" class="form-control" name="datexam" placeholder="saisissez la date à laquelle l\'examen a été éfféctué" value="'.$resultat[5].'" >
+							  </div>
+								<div class="form-group">
+									<label for="resexam" >Résultat du patient à l\'examen</label>
+									<input type="number"  step="0.01" class="form-control" name="resexam" placeholder="saisissez la valeur des résultats du patient" value="'.$resultat[7].'" >
+							  </div>
+						';
+					}
+					else{//ajout formulaire insert ths_examen
+						$modalsModif.='
+								<div class="form-group">
+									<label for="numexam" >Numéro de l\'examen</label>
+									<input type="number" class="form-control" name="numexam" placeholder="saisissez le numéro de l\'examen" value="'.$resultat[0].'" >
+							  </div>
+							  <div class="form-group">
+									<label for="libexam" >Nom de l\'examen</label>
+									<input type="text" class="form-control" name="libexam" placeholder="saisissez le libellé de l\'examen" value="'.$resultat[1].'" >
+							  </div>
+								<div class="form-group form-inline">
+									<label for="minexam" >La valeur minimale de l\'examen</label>
+									<input type="number" style="margin-left:10px;" class="form-control" name="minexam" placeholder="saisissez la valeur minimale de l\'examen cherché" value="'.$resultat[2].'" >
+									<label for="maxexam" style="margin-left:50px;">La valeur maximale de l\'examen</label>
+									<input type="number" style="margin-left:10px;" class="form-control" name="maxexam" placeholder="saisissez la valeur maximale de l\'examen cherché" value="'.$resultat[3].'" >
+								</div>
+						';
+					}
+					$modalsModif.='
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+								<button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+							</div>
+							</form>
+						</div>
+					</div>
+				</div>';
+
+				//pour l'apparition de la fenetre de suppression (modalmodif)
+
+				$modalsSupp.='
+					<div class="modal fade" id="'.$idunique.'supp" tabindex="-1" role="dialog" aria-labelledby="'.$idunique.'suppLabel" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="'.$idunique.'suppLabel">Supprimer l\'enregistrement</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<form class="container modal-body" action="../../supprimer/examen/'.($mesParams["choixreq"]?'suppExamPat':'suppExamThs').'.php" method="get">
+										<div class="modal-body">							';
+						if($mesParams["choixreq"]){//ajout formulaire delete rel_patient_biologie
+							$modalsSupp.='
+									<input type="hidden" class="form-control" name="numexam" value="'.$resultat[0].'" >
+									<input type="hidden" class="form-control" name="numpat" value="'.$resultat[4].'" >
+									<input type="hidden" class="form-control" name="datexam" value="'.$resultat[5].'" >
+									<p>
+										<span class="text-muted">Numéro examen :<b class="text-muted">'.$resultat[0].'</b>, </span>
+										<span class="text-muted">Numéro patient :<b class="text-muted">'.$resultat[4].'</b>, </span>
+										<span class="text-muted">Date de l\' examen :<b class="text-muted">'.$resultat[5].'</b>, </span>
+										<span class="text-muted">Resultat de l\' examen :<b class="text-muted">'.$resultat[7].'</b>, </span>
+									</p>
+
+							';
+						}
+						else{//ajout formulaire insert ths_examen
+							$modalsSupp.='
+									<input type="hidden" class="form-control" name="numexam" value="'.$resultat[0].'" >
+									<p><span class="text-muted">Numéro examen :<b class="text-muted">'.$resultat[0].'</b>, </span><span class="text-muted">Libellé examen :<b class="text-muted">'.$resultat[1].'</b>, </span><span><span class="text-muted">Borne résulat examen : [<b class="text-muted">'.$resultat[2].'</b>;<b class="text-muted">'.$resultat[3].'</b>] </span></p>
+							';
+						}
+						$modalsSupp.='
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+									<button type="submit" class="btn btn-primary">Supprimer l\'enregistrement</button>
+								</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				';
+
 
 				echo'</tr>';
 			} while ($resultat = $req->fetch());
@@ -104,10 +225,13 @@
 			 </table>
 		 </div>
 			';
+
+			print '<div>'.$modalsModif.'</div>';
+			print '<div>'.$modalsSupp.'</div>';
 		}
 		else{
-			echo "<b>Erreur dans l'exécution de la requête ou zero resultat</b><br/>";
-			echo "<b>Message de mySQL: </b>".implode("\n",$req->errorInfo());
+			echo "<b>Zéro resultat pour cette requète</b><br/>";
+			//echo "<b>Message de mySQL: </b>".implode("\n",$req->errorInfo());
 			echo "<a href='formConsultExamen.php'><p> Retour au formulaire</p></a>";
 		}
 		$req->closeCursor() ;

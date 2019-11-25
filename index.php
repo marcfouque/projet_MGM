@@ -14,7 +14,7 @@
     <li class="list-group-item"> <a href="#" >Nouveau Traitement</a></li>
     <li class="list-group-item"><a href="#"  >Nouvel Examen</a></li>
 		<li class="list-group-item"><a href="#"  >Traitement à un Patient</a></li>
-		<li class="list-group-item"><a href="#"  >Examen à un Patient</a></li>
+		<li class="list-group-item"><a href="pages/ajouter/examens/formAjoutExam.php"  >Examen à un Patient</a></li>
   </ul>
   </div>
   <div class="card">

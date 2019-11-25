@@ -34,7 +34,7 @@ $("#formauthen").submit(function(event){
     //requete ajax
     $.ajax({
         type: "POST",
-        url: "tools/authenti.php",
+        url: "/projet_MGM/tools/authenti.php",
         data:donn,
         success : function(retour){
           console.log(retour);
@@ -44,10 +44,11 @@ $("#formauthen").submit(function(event){
             $("#formauthen").hide();
             $("#formdeco").show();
             */
-            $('#formauthen').replaceWith('<form class="form-inline navbar-nav ml-auto justify-content-end" id="formdeco"><button type="submit" class="btn btn-primary btn-outline-success">Se Deconnecter</button></form>');
+            $('#formauthen').replaceWith('<form class="form-inline navbar-nav ml-auto justify-content-end" id="formdeco"><button type="submit" class="btn btn-outline-success">Se Deconnecter</button></form>');
           }
           else if(retour==2){
             console.log("identifiants incorrects")
+            alert("identifiants incorrects");
           }
           else{
             console.log("nope")
@@ -62,7 +63,7 @@ $("#formdeco").submit(function(event){
     //requete ajax
     $.ajax({
         type: "GET",
-        url: "tools/deco.php",
+        url: "/projet_MGM/tools/deco.php",
         success : function(retour){
           console.log(retour);
           if(retour==1){

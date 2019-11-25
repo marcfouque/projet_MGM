@@ -28,5 +28,25 @@
 					"obligatoire"=>array("choixreq"),
 					"facultatif"=>array("numexam","libexam","maxexam","minexam","datexam","numpat","resexam")
 				],
+		"ajoutExamPat"=>[
+					"obligatoire"=>array("numexam","datexam","numpat"),
+					"facultatif"=>array("resexam")
+				],
+		"modifExamPat"=>[
+					"obligatoire"=>array("numexam","datexam","numpat"),
+					"facultatif"=>array("resexam")
+				],
+		"modifExamThs"=>[
+					"obligatoire"=>array("numexam","libexam","maxexam","minexam"),
+					"facultatif"=>array()
+				],
+		"suppExamPat"=>[
+					"obligatoire"=>array("numexam","datexam","numpat"),
+					"facultatif"=>array()
+				],
+		"suppExamThs"=>[
+					"obligatoire"=>array("numexam"),
+					"facultatif"=>array()
+				]
 	];
 ?>

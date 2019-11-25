@@ -44,7 +44,7 @@
 			print'
 					<form class="form-inline navbar-nav ml-auto justify-content-end" id="formdeco">
 						<span>'.$_SESSION['coco'].'</span>
-						<button type="submit" class="btn btn-primary btn-outline-success">Se Deconnecter</button>
+						<button type="submit" class="btn btn-outline-success">Se Deconnecter</button>
 					</form>
 			';
 		}
@@ -71,6 +71,28 @@
 					  <li class="nav-item active">
 						<a class="nav-link" href="'.$prefix.'pages/aide.php">Aide <span class="sr-only">(current)</span></a>
 					  </li>
+						<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="dropAjou" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						  Ajouter
+						</a>
+						<div class="dropdown-menu" aria-labelledby="dropAjou">
+						  <a class="dropdown-item" href="#" >Nouveau Traitement</a>
+					    <a class="dropdown-item" href="#"  >Nouvel Examen</a>
+							<a class="dropdown-item" href="#"  >Traitement à un Patient</a>
+							<a class="dropdown-item" href="'.$prefix.'pages/ajouter/examens/formAjoutExam.php"  >Examen à un Patient</a>
+						</div>
+					  </li>
+						<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="dropConsul" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						  Consulter
+						</a>
+						<div class="dropdown-menu" aria-labelledby="dropConsul">
+						  <a class="dropdown-item" href="'.$prefix.'pages/consulter/patient/consultpatient.php" >Patient</a>
+					    <a class="dropdown-item" href="'.$prefix.'pages/consulter/examen/formConsultExamen.php"  >Examen</a>
+					    <a class="dropdown-item" href="#"  >Centre</a>
+						 	<a class="dropdown-item" href="#"  >Traitement</a>
+						</div>
+					  </li>
 					  <li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						  Créateurs
@@ -91,7 +113,6 @@
 		';
 
 	}
-
 
 	function getStart($granularite=0){
 		//fonction "printant" le début d'un fichier html avec le <head> et la bar de navigation
