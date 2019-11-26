@@ -50,6 +50,7 @@
 				],
 		"consultTrait"=>[
 					"obligatoire"=>array("libtrait"),
+					"facultatif"=>array()
 				],
 	];
 ?>

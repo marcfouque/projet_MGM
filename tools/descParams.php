@@ -68,7 +68,7 @@
 		"choixreq"=>[
 			"type"=>"booleen"
 		],
-		"libellettt"=>[
+		"libtrait"=>[
 			"type"=>"string"
 		],
 	]
