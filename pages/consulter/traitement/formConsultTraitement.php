@@ -41,7 +41,7 @@
 		?>
 
 	<form action = "scriptConsultationTraitement.php" method = "POST">
-	<label><input type = "text" name="user"></label></br>
+	<label><input type = "text" name="traitement" id="traitement"></label></br>
 	<input type="submit" value="Rechercher">
 	</form>
 		<?php

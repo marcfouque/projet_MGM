@@ -27,7 +27,7 @@
     	<li class="list-group-item"> <a href="pages/consulter/patient/consultpatient.php" >Patient</a></li>
 	    <li class="list-group-item"><a href="pages/consulter/examen/formConsultExamen.php"  >Examen</a></li>
 	    <li class="list-group-item"><a href="#"  >Centre</a></li>
-		  <li class="list-group-item"><a href="#"  >Traitement</a></li>
+		  <li class="list-group-item"><a href="pages/consulter/traitement/formConsultTraitement.php"  >Traitement</a></li>
   	</ul>
 	</div>
 </div>

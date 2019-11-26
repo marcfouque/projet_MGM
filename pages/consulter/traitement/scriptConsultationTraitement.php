@@ -2,40 +2,38 @@
 
 		//Script consultation traitement
 
-
-		require "tools/connect.php";
+		require "../../../tools/functionsPrint.php";
+		getStart(3);
+		require "../../../tools/functionsParams.php";
 		
-		require "tools/functionsParams.php";
 		
-		$mesParams = verifParams("nomPage1",$_GET);
+		$mesParams = verifParams("formConsultationTraitement",$_GET);
 		if($mesParams[0]==0){//parametre manquant
-			echo $mesParams[1];
+			print '
+				<p class="display-4"> Parametre manquant <a href="#'.$mesParams[2].'"> Voir le paramètre manquant</a></p>';
 		}
 		else if($mesParams[0]==2){//parametre invalide
-			echo $mesParams[1];
+			print ' <p> Le paramètre est invalide </p>';
 		}
 		else if($mesParams[0]==1){//parametres bons
-			$mesParams = $mesParams[1];
-			print implode(" _ ",$mesParams);
+		require "../../../tools/connect.php";
+			
+			$requete = "SELECT patient.NOM, patient.PRENOM FROM patient INNER JOIN (rel_patient_traitement INNER JOIN ths_traitement on rel_patient_traitement.NUMTTT = ths_traitement.NUMTTT) ON patient.NUMPAT = rel_patient_traitement.NUMPAT WHERE LIBELLETTT like :nom_traitement";
+			$req = $bdd->prepare($requete);
+			$req->execute(array(':nom_traitement' => $_POST['traitement']));
+			$resultat = $req->fetch();
+		if($resultat){
+			do {
+				echo "<p>".$resultat."</p>";
+			} while ($resultat = $req->fetch());
 		}
-		*/
-		
-		$requete = 'select SELECT patient.NOM FROM patient INNER JOIN (rel_patient_traitement INNER JOIN ths_traitement on rel_patient_traitement.NUMTTT = ths_traitement.NUMTTT) ON patient.NUMPAT = rel_patient_traitement.NUMPAT WHERE LIBELLETTT like "'.trea"  from patient;'
-		$req = $bdd->prepare($requete);
-		$req->execute(array(':p_user' => $_POST['utilisateur']));
-		$resultat = $req->fetch();
-		if($resultat){//verif si resultat
-			do {//iteration sur toutes les lignes
-				echo"<p>mmon resultatofjfiijeifhdihgdihsihgi $resultat</p>";
-			} while ($resultat = $req->fetch(););
-		}
-		else{
+		else {
 			echo "<b>Erreur dans l'exécution de la requête ou zero resultat</b><br/>";
 			echo "<b>Message de mySQL: </b>".$req->errorInfo();
 		}
 		$req->closeCursor() ;
+			print implode(" _ ",$mesParams);
+		}
 		
-		echo "<h1>Script consultation traitement</h1>"
-		
-	
+			
 		?>

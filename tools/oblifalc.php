@@ -47,6 +47,9 @@
 		"suppExamThs"=>[
 					"obligatoire"=>array("numexam"),
 					"facultatif"=>array()
-				]
+				],
+		"formConsultationTraitement"=>[
+					"obligatoire"=>array("libellettt"),
+				],
 	];
 ?>
