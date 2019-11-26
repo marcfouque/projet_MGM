@@ -20,7 +20,7 @@
 			
 			$requete = "SELECT patient.NOM, patient.PRENOM FROM patient INNER JOIN (rel_patient_traitement INNER JOIN ths_traitement on rel_patient_traitement.NUMTTT = ths_traitement.NUMTTT) ON patient.NUMPAT = rel_patient_traitement.NUMPAT WHERE LIBELLETTT like :nom_traitement";
 			$req = $bdd->prepare($requete);
-			$req->execute(array(':nom_traitement' => $_POST['traitement']));
+			$req->execute(array(':nom_traitement' => $_GET['libtrait']));
 			$resultat = $req->fetch();
 		if($resultat){
 			do {

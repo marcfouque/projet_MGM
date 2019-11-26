@@ -48,8 +48,8 @@
 					"obligatoire"=>array("numexam"),
 					"facultatif"=>array()
 				],
-		"formConsultationTraitement"=>[
-					"obligatoire"=>array("libellettt"),
+		"consultTrait"=>[
+					"obligatoire"=>array("libtrait"),
 				],
 	];
 ?>

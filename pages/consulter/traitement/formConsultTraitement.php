@@ -37,14 +37,17 @@
 		}
 		$req->closeCursor() ;
 		*/
-		echo "<h1>Rechercher un traitement</h1>";
-		?>
-
-	<form action = "scriptConsultationTraitement.php" method = "POST">
-	<label><input type = "text" name="traitement" id="traitement"></label></br>
-	<input type="submit" value="Rechercher">
+		print '
+		
+	<fieldset><legend>Rechercher un traitement</legend>
+	<form action = "scriptConsultationTraitement.php" method = "GET">
+		<table>
+		<td><input type ="text" name="libtrait" id="libtrait"></td>
+		<td><input type="submit" value="Rechercher"></td>
+		</table>
 	</form>
-		<?php
+	</fieldset>';
+		
 		getEnd(3);
 		?>
 </html>

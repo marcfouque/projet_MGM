@@ -11,7 +11,7 @@
       <p class="card-text">Ajouter un élément à la base</p>
     </div>
 	<ul class="list-group list-group-flush">
-    <li class="list-group-item"> <a href="#" >Nouveau Traitement</a></li>
+    <li class="list-group-item"> <a href="pages/ajouter/traitementThesaurus/formAjoutTraitementThesaurus.php" >Nouveau Traitement</a></li>
     <li class="list-group-item"><a href="#"  >Nouvel Examen</a></li>
 		<li class="list-group-item"><a href="#"  >Traitement à un Patient</a></li>
 		<li class="list-group-item"><a href="pages/ajouter/examens/formAjoutExam.php"  >Examen à un Patient</a></li>

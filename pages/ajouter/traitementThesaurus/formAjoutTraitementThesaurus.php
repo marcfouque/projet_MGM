@@ -34,6 +34,14 @@
 		}
 		$req->closeCursor() ;
 		*/
-	echo "<h1>Formulaire ajout traitement  au thesaurus</h1>";
+	print '
+	<fieldset><legend>Ajouter un traitement</legend>
+	<form action = "scriptConsultationTraitement.php" method = "POST">
+		<table>
+		<td><label>Veuillez renseigner le nom du traitement à ajouter : <input type = "text" name="traitement" id="traitement"></td>
+		<td><input type="submit" value="Rechercher"></td>
+		</table>
+	</form>
+	</fieldset>';
 	getEnd(3);
 		?>
