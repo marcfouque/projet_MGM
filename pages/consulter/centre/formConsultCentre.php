@@ -1,12 +1,9 @@
-<?php 
-	session_start(); 
-	require "../../../tools/functionsPrint.php";
-	getStart(3);
-	
-		//require "tools/connect.php";
+<?php session_start(); 
+require "../../../tools/functionsPrint.php";
+getStart(3);
+require "../../../tools/functionsParams.php";
+require "../../../tools/connect.php";
 		/*
-		require "tools/functionsParams.php";
-		
 		$mesParams = verifParams("nomPage1",$_GET);
 		if($mesParams[0]==0){//parametre manquant
 			echo $mesParams[1];
@@ -35,17 +32,33 @@
 		}
 		$req->closeCursor() ;
 		*/
-		print '
+		print 
+		'
+		<form action="scriptConsultationCentre.php" method="GET"
+		Ville : 
+		<div class="input-group">
+		<select class="custom-select" id="choixville" name="choixville" aria-label="Example select with button addon">
+		<option selected>Ville</option>';
+
+		$requete= "SELECT LIBELLECENTRE FROM ths_centre";
+		$resultat=$bdd->query($requete);
+
+		while ($ligne = $resultat->fetch()){  
+			echo "<option value=".$ligne['LIBELLECENTRE']."> ".$ligne['LIBELLECENTRE']." </option>";
+		}
+		$resultat->closeCursor();
 		
-	<fieldset><legend>Rechercher un centre</legend>
-	<form action = "scriptConsultationCentre.php" method = "GET">
-		<table>
-		<td><input type ="text" name="libcentre" id="libcentre"></td>
-		<td><input type="submit" value="Rechercher"></td>
-		</table>
-	</form>
-	</fieldset>';
-		
-		
-	getEnd(3);
+		echo'</select></br>
+		<input class="btn btn-primary" type="submit" value="Afficher">
+  		</div>
+  		</form>';
+
+
+	
+
+
+
+
+
+		getEnd(3);
 		?>

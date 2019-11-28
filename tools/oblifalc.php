@@ -40,5 +40,9 @@
 					"obligatoire"=>array("treatadd"),
 					"facultatif"=>array()
 				],
+		"consultCentre"=>[
+					"obligatoire"=>array("choixville"),
+					"facultatif"=>array()
+				],		
 	];
 ?>

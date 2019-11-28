@@ -74,5 +74,9 @@
 		"treatadd"=>[
 			"type"=>"string"
 		],
+		"choixville"=>[
+			"type"=>"string"
+		],
+
 	]
 ?>
