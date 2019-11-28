@@ -151,4 +151,133 @@
 		';
 
 	}
+
+	function getResultatRequete(String $requete, Array $arrexec, String $formModifLigne, String $formSuppLigne, $bdd){
+		//fonction permettant d'afficher les rsultats sous la forme d'un tableeau
+		//$requete = String format sql , représentant la requte transmise à la base de données
+		//$arrexec = array() associatif, des termes à remplacer lors de l'execution de la requete, $req->execute(ARRAY)
+		//$formModifLigne = string format html correspondant au formaulaire de modification de la ligne
+		//$formSuppLigne =  string format html correspondant au formaulaire de suppression de la ligne
+		//$bdd un objet base de données contenant la connexion à la base de données, /tools/connect.php
+
+		function remplaceMotClef(String $form, Array $colonne,$resultat){
+			//remplace tous les mots-clefs dinserer dans les formauliares par les valeurs correspondantes
+			$formulaire = $form;	//clone de $form
+			$chaineRecap = "";		//chaine recapitulative de la ligne, utile pour §MOTCLEFS
+			for($i = 0; $i < count($colonne)-1; $i++){	//colonne-1 pour enlever "action" (derniere colonne avec les boutons)
+				$formulaire = str_replace("§MOTCLEF.".strtolower($colonne[$i]),$resultat[$i],$formulaire);	//remplacement du mot clef, nom varaible en minuscule
+				$chaineRecap .= '<span class="text-muted">'.$colonne[$i].' :<b class="text-muted">'.$resultat[$i].'</b>, </span>';
+			}
+			$chaineRecap = substr($chaineRecap,0,-9).substr($chaineRecap, -7);
+			$formulaire = str_replace("§MOTCLEFS",$chaineRecap,$formulaire);
+			return $formulaire;
+		}
+		//preparation requete
+		$req = $bdd->prepare($requete);
+		$req->execute($arrexec);
+		$resultat = $req->fetch();
+
+		if($resultat){//verif si resultat
+
+			//récupération noms colonnes
+			$colonnes = array();
+			for ($i = 0; $i < $req->columnCount(); $i++)$colonnes[$i] = ($req->getColumnMeta($i))['name'];
+			$colonnes[$req->columnCount()]="Actions";
+			print'
+				<div class="table-responsive">
+			  	<table class="table table-hover">
+			';
+			print'
+				<thead>
+			    <tr>';
+			foreach($colonnes as $c)echo'<th scope="col">'.$c.'</th>';
+			print'
+				</tr>
+		  </thead>
+			';
+
+			//pour stocker les modals
+			$modalsModif = "";
+			$modalsSupp = "";
+
+			do {//iteration sur toutes les lignes
+				//identifiant unique de la ligne (servant d'id pour les modals)
+				$idunique = "";
+
+				echo'<tr>';
+				for($i=0;$i<count($colonnes)-1;$i++){//iterationàà traverslesResultat
+					echo'<td>'.$resultat[$i].'</td>';
+					$idunique.=$resultat[$i];
+				}
+				$idunique = 'id'.str_replace(",","",str_replace("-","",$idunique));
+				print'
+				<td>
+					<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+					  <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#'.$idunique.'modif" >Modifier</button>
+					  <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#'.$idunique.'supp" >Supprimer</button>
+					</div>
+				</td>
+				';
+
+				//pour l'apparition de la fenetre de modification (modalmodif)
+
+				$modalsModif.='
+				<div class="modal fade" id="'.$idunique.'modif" tabindex="-1" role="dialog" aria-labelledby="'.$idunique.'modifLabel" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="'.$idunique.'modifLabel">Modification</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							'.remplaceMotClef($formModifLigne,$colonnes,$resultat).'
+						</div>
+					</div>
+				</div>';
+
+				//pour l'apparition de la fenetre de suppression (modalmodif)
+
+				$modalsSupp.='
+					<div class="modal fade" id="'.$idunique.'supp" tabindex="-1" role="dialog" aria-labelledby="'.$idunique.'suppLabel" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="'.$idunique.'suppLabel">Supprimer l\'enregistrement</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								'.remplaceMotClef($formSuppLigne,$colonnes,$resultat).'
+							</div>
+						</div>
+					</div>
+				';
+
+				echo'</tr>';
+			} while ($resultat = $req->fetch());
+
+			print'
+			 </table>
+		 </div>
+			';
+
+			print '<div>'.$modalsModif.'</div>';
+			print '<div>'.$modalsSupp.'</div>';
+		}
+		else{
+			echo "<b>Zéro resultat pour cette requète</b><br/>";
+			//echo "<b>Message de mySQL: </b>".implode("\n",$req->errorInfo());
+			echo "<a href='formConsultExamen_bis.php'><p> Retour au formulaire</p></a>";
+		}
+
+
+
+
+		$req->closeCursor() ;
+
+
+
+	}
+
 ?>
