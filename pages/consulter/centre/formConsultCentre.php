@@ -35,7 +35,17 @@
 		}
 		$req->closeCursor() ;
 		*/
-		echo "<h1>Formulaire consultation centre</h1>"
+		print '
+		
+	<fieldset><legend>Rechercher un centre</legend>
+	<form action = "scriptConsultationCentre.php" method = "GET">
+		<table>
+		<td><input type ="text" name="libcentre" id="libcentre"></td>
+		<td><input type="submit" value="Rechercher"></td>
+		</table>
+	</form>
+	</fieldset>';
+		
 		
 	getEnd(3);
 		?>

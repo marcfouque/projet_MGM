@@ -36,9 +36,9 @@
 		*/
 	print '
 	<fieldset><legend>Ajouter un traitement</legend>
-	<form action = "scriptConsultationTraitement.php" method = "POST">
+	<form action = "scriptAjoutTraitementThesaurus.php" method = "GET">
 		<table>
-		<td><label>Veuillez renseigner le nom du traitement à ajouter : <input type = "text" name="traitement" id="traitement"></td>
+		<td><label>Veuillez renseigner le nom du traitement à ajouter : <input type = "text" name="treatadd" id="treatadd"></td>
 		<td><input type="submit" value="Rechercher"></td>
 		</table>
 	</form>

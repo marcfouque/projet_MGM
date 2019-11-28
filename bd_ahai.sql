@@ -52,7 +52,7 @@ CREATE TABLE `ths_examen` (
 --
 
 CREATE TABLE `ths_traitement` (
-  `NUMTTT` int(6) NOT NULL,
+  `NUMTTT` int(6) NOT NULL AUTO_INCREMENT,
   `LIBELLETTT` varchar(30) NOT NULL,
   PRIMARY KEY (`NUMTTT`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

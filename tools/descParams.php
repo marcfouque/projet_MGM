@@ -71,5 +71,8 @@
 		"libtrait"=>[
 			"type"=>"string"
 		],
+		"treatadd"=>[
+			"type"=>"string"
+		],
 	]
 ?>

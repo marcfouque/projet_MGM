@@ -3,11 +3,12 @@
 		//Script consultation centre
 
 
-		//require "tools/connect.php";
-		/*
+		require "tools/connect.php";
+		require"tools/functionsPrint.php";
 		require "tools/functionsParams.php";
 		
-		$mesParams = verifParams("nomPage1",$_GET);
+		$mesParams = verifParams("consultCentre",$_GET);
+		//modifier oblifalc, descParam, functionsParam
 		if($mesParams[0]==0){//parametre manquant
 			echo $mesParams[1];
 		}
@@ -34,6 +35,6 @@
 			echo "<b>Message de mySQL: </b>".$req->errorInfo();
 		}
 		$req->closeCursor() ;
-		*/
+		
 		echo "<h1>Script consultation centre</h1>"
 		?>

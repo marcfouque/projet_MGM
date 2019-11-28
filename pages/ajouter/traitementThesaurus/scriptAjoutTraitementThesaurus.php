@@ -1,13 +1,12 @@
 <?php session_start(); 
-
-		//Script ajout traitement thesaurus
-
-
-		//require "tools/connect.php";
-		/*
-		require "tools/functionsParams.php";
 		
-		$mesParams = verifParams("nomPage1",$_GET);
+require "../../../tools/functionsPrint.php";
+require "../../../tools/functionsParams.php";
+
+require "../../../tools/connect.php";
+		
+		
+		$mesParams = verifParams("ajoutTraitThs",$_GET);
 		if($mesParams[0]==0){//parametre manquant
 			echo $mesParams[1];
 		}
@@ -15,25 +14,23 @@
 			echo $mesParams[1];
 		}
 		else if($mesParams[0]==1){//parametres bons
-			$mesParams = $mesParams[1];
-			print implode(" _ ",$mesParams);
-		}
-		*/
-		/*
-		$requete = 'select * from patient;'
+			//print implode(" _ ",$mesParams);
+
+		$requete = "INSERT INTO ths_traitement (LIBELLETTT) VALUES (:tttadd)";
 		$req = $bdd->prepare($requete);
-		$req->execute(array(':p_user' => $_POST['utilisateur']));
-		$resultat = $req->fetch();
-		if($resultat){//verif si resultat
+		$req->execute(array(':tttadd' => $_GET['treatadd']));
+		//$resultat = $req->fetch();
+		/*if($resultat){//verif si resultat
 			do {//iteration sur toutes les lignes
-				echo"<p>mmon resultatofjfiijeifhdihgdihsihgi $resultat</p>";
-			} while ($resultat = $req->fetch(););
+				echo "<p>".implode(" _ ",$resultat)."</p>";*/
+				echo"<h1>C'est ok</h1>";
+			/*} while ($resultat = $req->fetch());
 		}
 		else{
 			echo "<b>Erreur dans l'exécution de la requête ou zero resultat</b><br/>";
 			echo "<b>Message de mySQL: </b>".$req->errorInfo();
-		}
-		$req->closeCursor() ;
-		*/
-		echo "<h1>Script ajout traitement thesaurus</h1>"
+		}*/
+		$req->closeCursor() ;}
+		
+	
 		?>

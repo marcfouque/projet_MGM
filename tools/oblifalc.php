@@ -52,5 +52,9 @@
 					"obligatoire"=>array("libtrait"),
 					"facultatif"=>array()
 				],
+		"ajoutTraitThs"=>[
+					"obligatoire"=>array("treatadd"),
+					"facultatif"=>array()
+				],
 	];
 ?>
