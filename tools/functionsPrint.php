@@ -152,7 +152,7 @@
 
 	}
 
-	function getResultatRequete(String $requete, Array $arrexec, String $formModifLigne, String $formSuppLigne, $bdd){
+	function getResultatRequete($requete, $arrexec, $formModifLigne, $formSuppLigne, $bdd){
 		//fonction permettant d'afficher les rsultats sous la forme d'un tableeau
 		//$requete = String format sql , représentant la requte transmise à la base de données
 		//$arrexec = array() associatif, des termes à remplacer lors de l'execution de la requete, $req->execute(ARRAY)
@@ -160,7 +160,7 @@
 		//$formSuppLigne =  string format html correspondant au formaulaire de suppression de la ligne
 		//$bdd un objet base de données contenant la connexion à la base de données, /tools/connect.php
 
-		function remplaceMotClef(String $form, Array $colonne,$resultat){
+		function remplaceMotClef($form, $colonne,$resultat){
 			//remplace tous les mots-clefs dinserer dans les formauliares par les valeurs correspondantes
 			$formulaire = $form;	//clone de $form
 			$chaineRecap = "";		//chaine recapitulative de la ligne, utile pour §MOTCLEFS
@@ -181,7 +181,10 @@
 
 			//récupération noms colonnes
 			$colonnes = array();
-			for ($i = 0; $i < $req->columnCount(); $i++)$colonnes[$i] = ($req->getColumnMeta($i))['name'];
+			for ($i = 0; $i < $req->columnCount(); $i++){
+				$col = $req->getColumnMeta($i);
+				$colonnes[$i] = $col['name'];	
+			}
 			$colonnes[$req->columnCount()]="Actions";
 			print'
 				<div class="table-responsive">

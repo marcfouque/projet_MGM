@@ -4,6 +4,7 @@
 
 require "../../../tools/functionsPrint.php";
 require "../../../tools/functionsParams.php";
+getStart(3);
 
 $mesParams = verifParams("consultTrait",$_GET);
 		if($mesParams[0]==0){//parametre manquant
@@ -16,16 +17,49 @@ $mesParams = verifParams("consultTrait",$_GET);
 		else if($mesParams[0]==1){//parametres bons
       require "../../../tools/connect.php";
 
-      $requete = "SELECT patient.NOM, patient.PRENOM, patient.DDN FROM patient INNER JOIN (rel_patient_traitement INNER JOIN ths_traitement on rel_patient_traitement.NUMTTT = ths_traitement.NUMTTT) ON patient.NUMPAT = rel_patient_traitement.NUMPAT WHERE LIBELLETTT like :nom_traitement";
-      $req = $bdd->prepare($requete);
-      $req->execute(array(':nom_traitement' => $_GET['libtrait']));
+      $requete = "SELECT NOM, PRENOM, R.NUMTTT, LIBELLETTT, DATEDEB, DATEFIN FROM patient P INNER JOIN (rel_patient_traitement R INNER JOIN ths_traitement T on R.NUMTTT = T.NUMTTT) ON P.NUMPAT = R.NUMPAT WHERE LIBELLETTT like :nom_traitement";
+     // $req = $bdd->prepare($requete);
+     // $req->execute(array(':nom_traitement' => $_GET['libtrait']));
         //$NbreData = $req->rowCount();
-      $resultat = $req->fetch();
+      //$resultat = $req->fetch();
 
       echo '<h1>Vous avez recherché : '.$_GET['libtrait'].'</h1>';
-      
+      $formModifLigne= '<form class="container modal-body" action="../../modifier/examen/modifExamPat.php" method="get">
+                        <div class="modal-body">
+                          <div class="form-group">
+                            <label for="numttt" >Numéro du traitement</label>
+                            <input type="text" class="form-control" name="NUMTTT" placeholder="saisissez le numéro du traitement" value="§MOTCLEF.numttt" >
+                          </div>
+                          <div class="form-group">
+                            <label for="libttt" >Nom du traitement</label>
+                            <input type="text" class="form-control" name="libttt" placeholder="saisissez le libellé du traitement" value="§MOTCLEF.libellettt" >
+                          </div>
+                          <div class="form-group form-inline">
+                            <label for="datedebttt" >Date du début de la prise de traitement</label>
+                            <input type="number" style="margin-left:10px;" class="form-control" name="datedebttt" placeholder="saisissez la date du début de la prise de traitement" value="§MOTCLEF.valmin" >
+                            <label for="maxexam" >La valeur maximale de l\'examen</label>
+                            <input type="number" style="margin-left:10px;" class="form-control" name="maxexam" placeholder="saisissez la valeur maximale de l\'examen cherché" value="§MOTCLEF.valmax" >
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                          <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+                        </div>
+                    </form>';
 
-if($resultat){//verif si resultat
+      $formSuppLigne = '<form class="container modal-body" action="../../supprimer/examen/suppExamThs.php" method="get">
+                        <div class="modal-body">
+                          <input type="hidden" class="form-control" name="numexam">
+                          <p>§MOTCLEFS</p>
+                        </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                        <button type="submit" class="btn btn-primary">Supprimer l\'enregistrement</button>
+                      </div>
+                    </form>';           
+      getResultatRequete($requete,array(':nom_traitement' => $_GET['libtrait']),$formModifLigne,$formSuppLigne,$bdd);
+
+/*if($resultat){//verif si resultat
     echo '<h3>Liste des patients</h3>
     <div class="table-responsive">
     <table class="table table-hover">
@@ -45,7 +79,10 @@ if($resultat){//verif si resultat
       echo'<tr>';
       echo'<td>'.$resultat[0].'</td>';
       echo'<td>'.$resultat[1].'</td>';
-      echo'<td>'.$resultat[2].'</td>
+      echo'<td>'.$resultat[2].'</td>';
+      echo'<td>'.$resultat[3].'</td>';
+      echo'<td>'.$resultat[4].'</td>
+
       <td>
         <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
           <button type="button" class="btn btn-secondary">Modifier</button>
@@ -62,8 +99,8 @@ if($resultat){//verif si resultat
 } else {
       echo "Aucun traitement n'a été trouvé <br/>";
    }
-   $req->closeCursor() ;
+   $req->closeCursor() ;*/
   }
 
-
+getEnd(3);
 ?>

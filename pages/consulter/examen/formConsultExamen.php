@@ -70,7 +70,10 @@
 
 			//récupération noms colonnes
 			$colonnes = array();
-			for ($i = 0; $i < $req->columnCount(); $i++)$colonnes[$i] = ($req->getColumnMeta($i))['name'];
+			for ($i = 0; $i < $req->columnCount(); $i++){
+				$col = $req->getColumnMeta($i);
+				$colonnes[$i] = $col['name'];	
+			}
 			$colonnes[$req->columnCount()]="Actions";
 			print'
 				<div class="table-responsive">
