@@ -27,18 +27,24 @@ $mesParams = verifParams("consultTrait",$_GET);
       $formModifLigne= '<form class="container modal-body" action="../../modifier/examen/modifExamPat.php" method="get">
                         <div class="modal-body">
                           <div class="form-group">
-                            <label for="numttt" >Numéro du traitement</label>
-                            <input type="text" class="form-control" name="NUMTTT" placeholder="saisissez le numéro du traitement" value="§MOTCLEF.numttt" >
+                            <label for="nompat" >Nom du patient</label>
+                            <input type="text" class="form-control" name="nompat" placeholder="saisissez le numéro du traitement" value="§MOTCLEF.nom" >
                           </div>
                           <div class="form-group">
+                            <label for="prenompat" >Nom du traitement</label>
+                            <input type="text" class="form-control" name="prenompat" placeholder="saisissez le libellé du traitement" value="§MOTCLEF.prenom" >
+                          </div>
+                           <div class="form-group">
                             <label for="libttt" >Nom du traitement</label>
                             <input type="text" class="form-control" name="libttt" placeholder="saisissez le libellé du traitement" value="§MOTCLEF.libellettt" >
                           </div>
                           <div class="form-group form-inline">
-                            <label for="datedebttt" >Date du début de la prise de traitement</label>
-                            <input type="number" style="margin-left:10px;" class="form-control" name="datedebttt" placeholder="saisissez la date du début de la prise de traitement" value="§MOTCLEF.valmin" >
-                            <label for="maxexam" >La valeur maximale de l\'examen</label>
-                            <input type="number" style="margin-left:10px;" class="form-control" name="maxexam" placeholder="saisissez la valeur maximale de l\'examen cherché" value="§MOTCLEF.valmax" >
+                          <fieldset><legend>Prise du traitement</legend>
+                            <label for="datedebttt" >Début de prise</label>
+                            <input type="date" style="margin-left:10px;" class="form-control" name="datedebttt" placeholder="saisissez la date du début de la prise de traitement" value="§MOTCLEF.datedeb" >
+                            <label for="datefinttt" >Fin de prise</label>
+                            <input type="date" style="margin-left:10px;" class="form-control" name="datefinttt" placeholder="saisissez la date de fin de la prise de traitement" value="§MOTCLEF.datefin" >
+                            </fieldset>
                           </div>
                         </div>
                         <div class="modal-footer">
@@ -57,7 +63,7 @@ $mesParams = verifParams("consultTrait",$_GET);
                         <button type="submit" class="btn btn-primary">Supprimer l\'enregistrement</button>
                       </div>
                     </form>';           
-      getResultatRequete($requete,array(':nom_traitement' => $_GET['libtrait']),$formModifLigne,$formSuppLigne,$bdd);
+      getResultatRequete($requete,array(':nom_traitement' => $_GET['libtrait']),array("nom","prenom","datedeb", "datefin"),$formModifLigne,$formSuppLigne,$bdd);
 
 /*if($resultat){//verif si resultat
     echo '<h3>Liste des patients</h3>

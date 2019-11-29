@@ -159,7 +159,8 @@
 		//$formModifLigne = string format html correspondant au formaulaire de modification de la ligne
 		//$formSuppLigne =  string format html correspondant au formaulaire de suppression de la ligne
 		//$bdd un objet base de données contenant la connexion à la base de données, /tools/connect.php
-		//$colonnesVisible un array des nom de colonne que l'on veut voir apparaitre
+		//$colonnesVisible un array des noms de colonne que l'on veut voir apparaitre (en minuscules)
+
 
 		function remplaceMotClef($form, $colonne,$resultat){
 			//remplace tous les mots-clefs dinserer dans les formauliares par les valeurs correspondantes
@@ -195,7 +196,7 @@
 			}
 			//$colonnes[$req->columnCount()]="Actions";
 			$colonnesVisi[count($colonnesVisi)]="Actions";
-			echo implode("_",$colonnesVisi);
+			//echo implode("_",$colonnesVisi);
 			print'
 				<div class="table-responsive">
 			  	<table class="table table-hover">
