@@ -103,8 +103,8 @@
 											</div>
 										</form>';
 
-
-		getResultatRequete($requete,$arrexec,$formModifLigne,$formSuppLigne,$bdd);
+		//print les resultats de la requete avec des modals de modification/suppressio pour chaque ligne (cf /tools/functionParams.php [getResultatRequete()])
+		getResultatRequete($requete,$arrexec,array("numexam","numpat","res","valmin"),$formModifLigne,$formSuppLigne,$bdd);
 
 		//$req->closeCursor() ;
 

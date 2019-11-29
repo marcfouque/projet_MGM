@@ -152,19 +152,21 @@
 
 	}
 
-	function getResultatRequete($requete, $arrexec, $formModifLigne, $formSuppLigne, $bdd){
+	function getResultatRequete($requete, $arrexec, $colonnesVisible,$formModifLigne, $formSuppLigne, $bdd){
 		//fonction permettant d'afficher les rsultats sous la forme d'un tableeau
 		//$requete = String format sql , représentant la requte transmise à la base de données
 		//$arrexec = array() associatif, des termes à remplacer lors de l'execution de la requete, $req->execute(ARRAY)
 		//$formModifLigne = string format html correspondant au formaulaire de modification de la ligne
 		//$formSuppLigne =  string format html correspondant au formaulaire de suppression de la ligne
 		//$bdd un objet base de données contenant la connexion à la base de données, /tools/connect.php
+		//$colonnesVisible un array des nom de colonne que l'on veut voir apparaitre
 
 		function remplaceMotClef($form, $colonne,$resultat){
 			//remplace tous les mots-clefs dinserer dans les formauliares par les valeurs correspondantes
 			$formulaire = $form;	//clone de $form
 			$chaineRecap = "";		//chaine recapitulative de la ligne, utile pour §MOTCLEFS
-			for($i = 0; $i < count($colonne)-1; $i++){	//colonne-1 pour enlever "action" (derniere colonne avec les boutons)
+			//for($i = 0; $i < count($colonne)-1; $i++){	//colonne-1 pour enlever "action" (derniere colonne avec les boutons)
+			for($i = 0; $i < count($colonne); $i++){	//colonne-1 pour enlever "action" (derniere colonne avec les boutons)
 				$formulaire = str_replace("§MOTCLEF.".strtolower($colonne[$i]),$resultat[$i],$formulaire);	//remplacement du mot clef, nom varaible en minuscule
 				$chaineRecap .= '<span class="text-muted">'.$colonne[$i].' :<b class="text-muted">'.$resultat[$i].'</b>, </span>';
 			}
@@ -181,11 +183,19 @@
 
 			//récupération noms colonnes
 			$colonnes = array();
+			$colonnesVisi=array();
+			$colonnesVisiIndex=array();
 			for ($i = 0; $i < $req->columnCount(); $i++){
 				$col = $req->getColumnMeta($i);
-				$colonnes[$i] = $col['name'];	
+				$colonnes[$i] = $col['name'];
+				if(in_array (strtolower($col['name']) , $colonnesVisible)){//$colonnesVisi[$i] = $col['name'];
+					array_push ($colonnesVisi, $col['name']);
+					array_push($colonnesVisiIndex,$i);
+				}
 			}
-			$colonnes[$req->columnCount()]="Actions";
+			//$colonnes[$req->columnCount()]="Actions";
+			$colonnesVisi[count($colonnesVisi)]="Actions";
+			echo implode("_",$colonnesVisi);
 			print'
 				<div class="table-responsive">
 			  	<table class="table table-hover">
@@ -193,7 +203,7 @@
 			print'
 				<thead>
 			    <tr>';
-			foreach($colonnes as $c)echo'<th scope="col">'.$c.'</th>';
+			foreach($colonnesVisi as $c)echo'<th scope="col">'.$c.'</th>';
 			print'
 				</tr>
 		  </thead>
@@ -208,9 +218,11 @@
 				$idunique = "";
 
 				echo'<tr>';
-				for($i=0;$i<count($colonnes)-1;$i++){//iterationàà traverslesResultat
-					echo'<td>'.$resultat[$i].'</td>';
-					$idunique.=$resultat[$i];
+				for($i=0;$i<count($colonnesVisi)-1;$i++){//iterationàà traverslesResultat
+					//echo'<td>'.$resultat[$i].'</td>';
+					//$idunique.=$resultat[$i];
+					echo'<td>'.$resultat[$colonnesVisiIndex[$i]].'</td>';
+					$idunique.=$resultat[$colonnesVisiIndex[$i]];
 				}
 				$idunique = 'id'.str_replace(",","",str_replace("-","",$idunique));
 				print'
