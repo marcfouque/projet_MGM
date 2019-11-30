@@ -36,23 +36,25 @@ $("#formauthen").submit(function(event){
         type: "POST",
         url: "/projet_MGM/tools/authenti.php",
         data:donn,
+        cache: false,
         success : function(retour){
           console.log(retour);
           if(retour==1){
             console.log("connecté");
-            /*
-            $("#formauthen").hide();
-            $("#formdeco").show();
-            */
-            $('#formauthen').replaceWith('<form class="form-inline navbar-nav ml-auto justify-content-end" id="formdeco"><button type="submit" class="btn btn-outline-success">Se Deconnecter</button></form>');
+            $( "#formauthen" ).removeClass( "notGriffin" ).addClass( "griffin" );
+            $( "#formdeco" ).removeClass( "griffin" ).addClass( "notGriffin" );
+            console.log("remplacement form")
+
           }
           else if(retour==2){
             console.log("identifiants incorrects")
             alert("identifiants incorrects");
+
           }
           else{
             console.log("nope")
           }
+          return retour;
 
         }
     });
@@ -63,21 +65,29 @@ $("#formdeco").submit(function(event){
     //requete ajax
     $.ajax({
         type: "GET",
+        cache: false,
         url: "/projet_MGM/tools/deco.php",
         success : function(retour){
           console.log(retour);
           if(retour==1){
             console.log("connecté");
-            /*
-            $("#formdeco").hide();
-            $("#formauthen").show();
-            */
-            $('#formdeco').replaceWith('<form class="form-inline navbar-nav ml-auto" id="formauthen"><div class="form-group nav-item justify-content-end"><input class="w-25 form-control" type="text" id="nomu" required placeholder="nom utilisateur" /><input class="w-25 form-control" type="password"  id="motp" required placeholder="mot de passe" /></div>	<button type="submit" class="btn btn-primary">Se Connecter</button></form>');
+            $( "#formdeco" ).removeClass( "notGriffin" ).addClass( "griffin" );
+            $( "#formauthen" ).removeClass( "griffin" ).addClass( "notGriffin" );
+            console.log("remplacement form")
           }
           else{
             console.log("nope")
           }
-
+          return retour;
+        },
+        error :function(retour){
+          console.log("Erreur");
+          console.log(retour);
+        },
+        complete :function(retour){
+          console.log("complete")
         }
     });
 });
+
+document.addEventListener("load",()=>{alert("refresh")})

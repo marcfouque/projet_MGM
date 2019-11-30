@@ -27,3 +27,10 @@ body{
 	position:fixed;
 	bottom:0px;
 }
+
+.griffin{
+	visibility:hidden;
+}
+.notGriffin{
+	visibility: visible;
+}
