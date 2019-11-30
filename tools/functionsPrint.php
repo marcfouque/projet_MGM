@@ -29,25 +29,20 @@
 		//granularite niveau dans l'arborescence par rapport à la racine
 		$prefix="";
 		for($i=0;$i<$granularite;$i++)$prefix.="../";
-		if(!isset($_SESSION["coco"])){
 			print'
-					<form class="form-inline navbar-nav ml-auto" id="formauthen">
+					<form class="form-inline navbar-nav ml-auto '.(!isset($_SESSION["coco"])?'notGriffin':'griffin').'" id="formauthen">
 					  <div class="form-group nav-item justify-content-end">
 							<input class="w-25 form-control" type="text" id="nomu" required placeholder="nom utilisateur" />
 							<input class="w-25 form-control" type="password"  id="motp" required placeholder="mot de passe" />
 						</div>
 						<button type="submit" class="btn btn-primary">Se Connecter</button>
 					</form>
+						<form class="form-inline navbar-nav ml-auto justify-content-end '.(isset($_SESSION["coco"])?'notGriffin':'griffin').'"  id="formdeco">
+							<span>'.(isset($_SESSION["coco"])?$_SESSION['coco']:'').'</span>
+							<button type="submit" class="btn btn-outline-success">Se Deconnecter</button>
+						</form>
 			';
-		}
-		else{
-			print'
-					<form class="form-inline navbar-nav ml-auto justify-content-end" id="formdeco">
-						<span>'.$_SESSION['coco'].'</span>
-						<button type="submit" class="btn btn-outline-success">Se Deconnecter</button>
-					</form>
-			';
-		}
+
 	}
 
 
