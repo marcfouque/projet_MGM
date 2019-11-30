@@ -78,7 +78,7 @@
 						<div class="dropdown-menu" aria-labelledby="dropAjou">
 						  <a class="dropdown-item" href="#" >Nouveau Traitement</a>
 					    <a class="dropdown-item" href="#"  >Nouvel Examen</a>
-							<a class="dropdown-item" href="#"  >Traitement à un Patient</a>
+							<a class="dropdown-item" href="'.$prefix.'pages/ajouter/traitementPatients/formAjoutTraitementPatient.php"  >Traitement à un Patient</a>
 							<a class="dropdown-item" href="'.$prefix.'pages/ajouter/examens/formAjoutExam.php"  >Examen à un Patient</a>
 						</div>
 					  </li>
@@ -87,7 +87,7 @@
 						  Consulter
 						</a>
 						<div class="dropdown-menu" aria-labelledby="dropConsul">
-						  <a class="dropdown-item" href="'.$prefix.'pages/consulter/patient/consultpatient.php" >Patient</a>
+						  <a class="dropdown-item" href="'.$prefix.'pages/consulter/patient/formConsultPatient.php" >Patient</a>
 					    <a class="dropdown-item" href="'.$prefix.'pages/consulter/examen/formConsultExamen.php"  >Examen</a>
 					    <a class="dropdown-item" href="#"  >Centre</a>
 						 	<a class="dropdown-item" href="#"  >Traitement</a>

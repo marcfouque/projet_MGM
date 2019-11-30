@@ -11,7 +11,7 @@ function verifParams($nomPage,$params){
 	*/
 	require "oblifalc.php";
 
-	//bouvle sur les params obligatoires pour verifier leur presence, retour 0 sinon
+	//boucle sur les params obligatoires pour verifier leur presence, retour 0 sinon
 	foreach ($obliFalc[$nomPage]["obligatoire"] as $obli) {
 		if(!isset($params[$obli]) or strlen($params[$obli])==0)return array(0,"Parametre manquant :".$obli,$obli);
 	}

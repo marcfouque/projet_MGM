@@ -35,5 +35,33 @@
 		}
 		$req->closeCursor() ;
 		*/
-		echo "<h1>Script ajout traitement patient</h1>"
+		print 
+		'
+		<form action="scriptAjoutTraitementPatient.php" method="GET"
+		Ville : 
+		<div class="input-group">
+		<select class="custom-select" id="choixville" name="choixville" aria-label="Example select with button addon">
+		<option selected>Ville</option>';
+
+		$requete= "SELECT LIBELLECENTRE FROM ths_centre";
+		$resultat=$bdd->query($requete);
+
+		while ($ligne = $resultat->fetch()){  
+			echo "<option value=".$ligne['LIBELLECENTRE']."> ".$ligne['LIBELLECENTRE']." </option>";
+		}
+		$resultat->closeCursor();
+		
+		echo'</select></br>
+		<input class="btn btn-primary" type="submit" value="Afficher">
+  		</div>
+  		</form>';
+
+
+	
+
+
+
+
+
+		getEnd(3);
 		?>

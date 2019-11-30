@@ -13,7 +13,7 @@
 	<ul class="list-group list-group-flush">
     <li class="list-group-item"> <a href="pages/ajouter/traitementThesaurus/formAjoutTraitementThesaurus.php" >Nouveau Traitement</a></li>
     <li class="list-group-item"><a href="#"  >Nouvel Examen</a></li>
-		<li class="list-group-item"><a href="#"  >Traitement à un Patient</a></li>
+		<li class="list-group-item"><a href="pages/ajouter/traitementPatients/formAjoutTraitementPatient.php"  >Traitement à un Patient</a></li>
 		<li class="list-group-item"><a href="pages/ajouter/examens/formAjoutExam.php"  >Examen à un Patient</a></li>
   </ul>
   </div>
@@ -24,7 +24,7 @@
       <p class="card-text">Consulter ou modifier la base de données</p>
     </div>
 	  <ul class="list-group list-group-flush">
-    	<li class="list-group-item"> <a href="pages/consulter/patient/consultpatient.php" >Patient</a></li>
+    	<li class="list-group-item"> <a href="pages/consulter/patient/formConsultPatient.php" >Patient</a></li>
 	    <li class="list-group-item"><a href="pages/consulter/examen/formConsultExamen.php"  >Examen</a></li>
 	    <li class="list-group-item"><a href="pages/consulter/centre/formConsultCentre.php"  >Centre</a></li>
 		  <li class="list-group-item"><a href="pages/consulter/traitement/formConsultTraitement.php"  >Traitement</a></li>

@@ -43,6 +43,10 @@
 		"consultCentre"=>[
 					"obligatoire"=>array("choixville"),
 					"facultatif"=>array()
-				],		
+				],	
+		"consultPatient"=>[
+					"obligatoire"=>array("numpat"),
+					"facultatif"=>array()
+				],					
 	];
 ?>
