@@ -77,6 +77,13 @@
 		"choixville"=>[
 			"type"=>"string"
 		],
+		"idCentre"=>[
+			"type"=>"entier",
+			"bornes"=>array(0,null)
+		],
+		"libCentre"=>[
+			"type"=>"string"
+		]
 
 	]
 ?>

@@ -93,7 +93,7 @@ function paramValid($clef,$valeur){
 
 function recastParams($params){
 	/*
-	fonction prenant un tableau clef/valeur et ressortant celui-ci mais avec des valeurs recastés selon le type de valeurs renseigné
+	fonction prenant un tableau clef/valeur et ressortant celui-ci mais avec des valeurs recastées selon le type de valeurs renseigné
 	*/
 	require "descParams.php";
 
@@ -101,9 +101,10 @@ function recastParams($params){
 	foreach(array_keys($params) as $clef){
 		if(strlen($resultat[$clef])==0)unset($resultat[$clef]);
 		else{
-			if($parametres[$clef]["type"]=="entier")$resultat[$clef]=(integer)$resultat[$clef];
-			if($parametres[$clef]["type"]=="double")$resultat[$clef]=(double)$resultat[$clef];
-			if($parametres[$clef]["type"]=="booleen")$resultat[$clef]=(bool)$resultat[$clef];
+			if ($parametres[$clef]["type"]=="string")$resultat[$clef]=htmlentities($resultat[$clef]);
+			else if($parametres[$clef]["type"]=="entier")$resultat[$clef]=(integer)$resultat[$clef];
+			else if($parametres[$clef]["type"]=="double")$resultat[$clef]=(double)$resultat[$clef];
+			else if($parametres[$clef]["type"]=="booleen")$resultat[$clef]=(bool)$resultat[$clef];
 		}
 	}
     return $resultat;

@@ -23,7 +23,29 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `bd_ahai`
 --
+DROP FUNCTION IF EXISTS getClef;
+DROP FUNCTION IF EXISTS CryptMdp;
+DROP FUNCTION IF EXISTS DecryptMdp;
 
+DELIMITER |
+CREATE FUNCTION getClef () RETURNS VARCHAR(100)
+BEGIN
+    RETURN "Evian&Chi1";
+END;
+    |
+CREATE FUNCTION CryptMdp (mdp VARCHAR(50)) RETURNS blob
+BEGIN
+    DECLARE mdpCrypte blob;
+    SET mdpCrypte=AES_ENCRYPT(mdp,getClef());
+    RETURN mdpCrypte;
+END;
+    |
+CREATE FUNCTION DecryptMdp (mdpCrypte blob) RETURNS VARCHAR(100)
+BEGIN
+    RETURN aes_decrypt(mdpCrypte,getClef());
+END;
+    |
+DELIMITER ;
 
 --
 -- Structure de la table `ths_centre`
@@ -74,7 +96,7 @@ CREATE TABLE `patient` (
   `IDCENTRE` int(6) DEFAULT NULL,
   `AHAIEVANS` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`NUMPAT`),
-  FOREIGN KEY (IDCENTRE) REFERENCES ths_centre(IDCENTRE)
+  FOREIGN KEY (IDCENTRE) REFERENCES ths_centre(IDCENTRE) on delete SET NULL on update cascade
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -3621,9 +3643,10 @@ INSERT INTO `rel_patient_traitement` (`NUMPAT`, `NUMTTT`, `DATEDEB`, `DATEFIN`) 
 -- A NE PAS FAIRE (sécurité des données, mdp, et clefs)
 --
 INSERT INTO `utilisateur` (`nomutilisateur`, `motdepasseU`) VALUES
-('gregory', AES_ENCRYPT('marcesttropbeau','Evian&Chi1')),
-('manon', AES_ENCRYPT('marcestsuperbeau','Evian&Chi1')),
-('marc', AES_ENCRYPT('jemaime','Evian&Chi1'));
+('gregory', CryptMdp('marcesttropbeau')),
+('manon', CryptMdp('marcestsuperbeau')),
+('marc', CryptMdp('jemaime')),
+('valerie',CryptMdp('projet_parfait'));
 
 
 

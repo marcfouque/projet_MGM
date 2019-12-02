@@ -72,7 +72,7 @@
 			$colonnes = array();
 			for ($i = 0; $i < $req->columnCount(); $i++){
 				$col = $req->getColumnMeta($i);
-				$colonnes[$i] = $col['name'];	
+				$colonnes[$i] = $col['name'];
 			}
 			$colonnes[$req->columnCount()]="Actions";
 			print'
@@ -233,7 +233,7 @@
 			print '<div>'.$modalsSupp.'</div>';
 		}
 		else{
-			echo "<b>Zéro resultat pour cette requète</b><br/>";
+			echo "<b>La recherche avec les paramètres ⬆ ne donne plus de résultats, ceux-ci ont été supprimés ou n'ont jamais éxisté </b><br/>";
 			//echo "<b>Message de mySQL: </b>".implode("\n",$req->errorInfo());
 			echo "<a href='formConsultExamen.php'><p> Retour au formulaire</p></a>";
 		}
