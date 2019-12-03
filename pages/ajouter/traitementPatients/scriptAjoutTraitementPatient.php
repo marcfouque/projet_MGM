@@ -20,12 +20,12 @@ else if($mesParams[0]==1){//parametres bons
 		$_GET['datefin'] = null;
 	}
 
-	//vérifie si les données ne sont déjà dans la base;
+	//vérifie si les données ne sont pas déjà dans la base;
 	$test=$bdd->query('SELECT count(*) as nb from rel_patient_traitement where numpat="'.$_GET['choixid'].'" and numttt="'.$_GET['choixttt'].'" and  datedeb="'.$_GET['datedeb'].'" ');
 	$count = $test->fetch();
 
 	if($count['nb']==0){
-		if($_GET['datedeb']>$_GET['datefin']){
+		if($_GET['datedeb']>$_GET['datefin'] and $_GET['datefin']!=null){
 			echo 'La date de fin est antérieure à la date de début ! Veuillez recommencer !
 			<form action="formAjoutTraitementPatient.php" method="GET"
 			<div class="input-group">

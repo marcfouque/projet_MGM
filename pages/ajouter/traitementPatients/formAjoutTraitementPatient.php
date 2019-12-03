@@ -11,11 +11,11 @@ require "../../../tools/connect.php";
 		<label for="choixid">Choix du patient</label>
 		<select required class="form-control" name="choixid" id="choixid" >';
 
-		$requete= "SELECT numpat FROM patient";
+		$requete= "SELECT numpat, prenom, nom FROM patient";
 		$resultat=$bdd->query($requete);
 
 		while ($ligne = $resultat->fetch()){  
-			echo "<option value=".$ligne['numpat']."> ".$ligne['numpat']." </option>";
+			echo "<option value=".$ligne['numpat']."> ".$ligne['numpat']." - ".$ligne['prenom']." ".$ligne['nom']."</option>";
 		}
 		$resultat->closeCursor();
 		
