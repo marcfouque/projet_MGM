@@ -79,9 +79,11 @@
 	  echo'<td>'.$resultat[11].'</td>
 	  <td>
         <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-          <button type="button" class="btn btn-secondary">Modifier</button>
-      <button type="button" data-toggle="modal" data-target="#infos" class="btn btn-secondary">Supprimer</button>
-<div class="modal" id="infos">
+          <button type="button" data-toggle="modal" data-target="#modif" class="btn btn-secondary">Modifier</button>
+      <button type="button" data-toggle="modal" data-target="#supp" class="btn btn-secondary">Supprimer</button>';
+	  
+	  //ouverture boite de dialogue pour supprimer;
+echo '<div class="modal" id="supp">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -102,8 +104,57 @@ Etes-vous sûr(e) de vouloir supprimer cette ligne?      </div>
 	 </div>
     </div>
   </div>
+</div>';
+//ouverture boite de dialogue pour modifier;
+echo'<div class="modal" id="modif">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Attention</h4>
+      </div>
+	  
+      <div class="modal-body">
+Indiquez les modifications  :    </div>
+<form class="container modal-body" action="../../supprimer/patient/modifPat.php" method="get">
+												<div class="input-group">';
+		echo'<label for="numpat">Prénom du patient: </label>
+		<input class="form-control" id="prenompat" placeholder="Prenom du patient" name="prenompat" aria-describedby="id">
+		<br/>
+		<label for="numpat">Nom du patient: </label>
+		<input class="form-control" id="nompat" placeholder="Nom du patient" name="nompat" aria-describedby="id">
+		<br/>
+		<label for="ddn">Date de naissance du patient: </label>
+		<input type=date class="form-control" id="ddn" name="ddn" aria-describedby="id">
+		<br/>
+		<label for="Sexe">Sexe du patient: </label>
+		<input class="form-control" id="sexe" placeholder="Sexe du patient" name="sexe" aria-describedby="id">
+		<br/>
+		<label for="consang">Consanguinité: </label>
+		<input class="form-control" id="consang" placeholder="Nom du patient" name="consang" aria-describedby="id">
+		<br/>
+		<label for="nbame">Nb semaines d\'aménorrhée : </label>
+		<input class="form-control" id="nbame" placeholder="Nom du patient" name="nbame" aria-describedby="id">
+		<br/>
+		<label for="pdnaiss">Poids à la naissance: </label>
+		<input class="form-control" id="poidsnaiss" placeholder="Nom du patient" name="poidsnaiss" aria-describedby="id">
+		<br/>
+		<label for="taillenaiss">Taille à la naissance: </label>
+		<input class="form-control" id="taillenaiss" placeholder="Nom du patient" name="taillenaiss" aria-describedby="id">
+		<br/>
+		<label for="pcnaiss">Périmètre cranien: </label>
+		<input class="form-control" id="pcnais" placeholder="Nom du patient" name="pcnais" aria-describedby="id">
+		<br/>
+										<div class="modal-footer">
+												<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+												<button type="submit" class="btn btn-primary">Modifier l\'enregistrement</button>
+											</div>
+										</form>
+	 </div>
+    </div>
+  </div>
 </div>
         </div>
+		
       </td>
       </tr>';
     } while ($resultat = $req->fetch());
