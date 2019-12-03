@@ -6,10 +6,10 @@ require "../../../tools/connect.php";
 		//choix du patient
 		print 
 		'
-		<form action="scriptAjoutTraitementPatient.php" method="GET"
-			  <div class="form-group">
+		<form action="scriptAjoutTraitementPatient.php" method="GET">
+		<div>
 		<label for="choixid">Choix du patient</label>
-		<select multiple class="form-control" id="choixid">';
+		<select required class="form-control" name="choixid" id="choixid" >';
 
 		$requete= "SELECT numpat FROM patient";
 		$resultat=$bdd->query($requete);
@@ -19,24 +19,29 @@ require "../../../tools/connect.php";
 		}
 		$resultat->closeCursor();
 		
-		echo'</select></br>
-  		</div>
-		
-		<div class="form-group">
+		//choix du traitement
+		echo'</select></div></br>
+		<div>
 		<label for="choixttt">Choix du traitement</label>
-		<select multiple class="form-control" id="choixttt">';
+		<select required class="form-control" name="choixttt" id="choixttt" >';
 
-		$requete= "SELECT libellettt FROM ths_traitement";
+		$requete= "SELECT numttt, libellettt FROM ths_traitement";
 		$resultat=$bdd->query($requete);
 
 		while ($ligne = $resultat->fetch()){  
-			echo "<option value=".$ligne['libellettt']."> ".$ligne['libellettt']." </option>";
+			echo "<option value=".$ligne['numttt']."> ".$ligne['libellettt']." </option>";
 		}
 		$resultat->closeCursor();
 		
-		echo'</select></br>
+		echo'</select></div></br>';
+		//date debut et date de fin de traitement date debut oblig, date fin facult
+
+		echo'<div><label for="datedeb">Date de début de traitement</label>
+		<input type="date" name="datedeb"></div></br>
+		<div><label for="datefin">Date de fin de traitement</label>
+		<input type="date" name="datefin"></div></br>
 		<input class="btn btn-primary" type="submit" value="Valider">
-  		</div>
   		</form>';
+		
 getEnd(3);	
 		?>

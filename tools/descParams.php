@@ -83,6 +83,27 @@
 		],
 		"libCentre"=>[
 			"type"=>"string"
+		],
+		"choixid"=>[
+			"type"=>"entier",
+			"bornes"=>array(0,null)
+		],
+		"choixttt"=>[
+			"type"=>"entier",
+			"bornes"=>array(0,null)
+		],		
+		"datedeb"=>[
+			"type"=>"date",
+			"bornes"=>array('1900-01-01',null),
+		],
+		"datefin"=>[
+			"type"=>"date",
+		],
+		"nompat"=>[
+			"type"=>"string"
+		],
+		"prenompat"=>[
+			"type"=>"string"
 		]
 
 	]

@@ -2,8 +2,6 @@
 
 		//Script consultation centre
 
-
-		
 		require"../../../tools/functionsPrint.php";
 		require "../../../tools/functionsParams.php";
 		getStart(3);
@@ -21,10 +19,24 @@
 			//$mesParams = $mesParams[1];
 			//print implode(" _ ",$mesParams);
 		
+		if($_GET['numpat']!=''){
 		$requete = 'SELECT * FROM `patient` WHERE patient.numpat LIKE :idpat';
 		$req = $bdd->prepare($requete);
 		$req->execute(array(':idpat' => $_GET['numpat']));	
+		}elseif($_GET['nompat']!='' AND $_GET['prenompat']!=''){
+		$requete = 'SELECT * FROM `patient` WHERE patient.NOM LIKE :nomp and patient.PRENOM LIKE :prenomp';
+		$req = $bdd->prepare($requete);
+		$req->execute(array(':nomp' => $_GET['nompat'],':prenomp' => $_GET['prenompat']));	
+		}else{
+		$requete = 'SELECT * FROM `patient` WHERE patient.NOM LIKE :nomp or patient.PRENOM LIKE :prenomp';
+		$req = $bdd->prepare($requete);
+		$req->execute(array(':nomp' => $_GET['nompat'],':prenomp' => $_GET['prenompat']));	
+		}
+	
+		/*$req = $bdd->prepare($requete);
+		$req->execute(array(':idpat' => $_GET['numpat'],':nomp' => $_GET['nompat'],':prenomp' => $_GET['prenompat']));	*/
 		$resultat = $req->fetch();
+		
 		if($resultat){//verif si resultat
 			
     echo '<h3>Liste des patients</h3>
@@ -34,8 +46,8 @@
     <thead>
     <tr>
 	  <td>NumPat</td>
-      <td>Nom</td>
       <td>Prénom</td>
+      <td>Nom</td>
       <td>Date de naissance</td>
 	  <td>Sexe</td>
 	  <td>Consanguinité parentale</td>
@@ -68,7 +80,29 @@
 	  <td>
         <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
           <button type="button" class="btn btn-secondary">Modifier</button>
-          <button type="button" class="btn btn-secondary">Supprimer</button>
+      <button type="button" data-toggle="modal" data-target="#infos" class="btn btn-secondary">Supprimer</button>
+<div class="modal" id="infos">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Attention</h4>
+      </div>
+	  
+      <div class="modal-body">
+Etes-vous sûr(e) de vouloir supprimer cette ligne?      </div>
+<form class="container modal-body" action="../../supprimer/patient/suppTraitPat.php" method="get">
+												<div class="modal-body">
+													<input type="hidden" value="'.$resultat[0].'" class="form-control" name="numpat">
+												</div>
+											<div class="modal-footer">
+												<button type="button" id="4" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+												<button type="submit" class="btn btn-primary">Supprimer l\'enregistrement</button>
+											</div>
+										</form>
+	 </div>
+    </div>
+  </div>
+</div>
         </div>
       </td>
       </tr>';

@@ -1,67 +1,63 @@
 <?php session_start(); 
+//Script consultation centre
+require"../../../tools/functionsPrint.php";
+require "../../../tools/functionsParams.php";
+getStart(3);
 
-		//Script ajout traitement patient
+$mesParams = verifParams("ajoutTraitPat",$_GET);
+//modifier oblifalc, descParam, functionsParam
+if($mesParams[0]==0){//parametre manquant
+	echo $mesParams[1];
+}
+else if($mesParams[0]==2){//parametre invalide
+	echo $mesParams[1];
+}
+else if($mesParams[0]==1){//parametres bons
+	require "../../../tools/connect.php";
 
+	// On ajoute le traitement dans la table relation patient traitement
+	if($_GET['datefin']==''){
+		$_GET['datefin'] = null;
+	}
 
-		//require "tools/connect.php";
-		/*
-		require "tools/functionsParams.php";
-		
-		$mesParams = verifParams("nomPage1",$_GET);
-		if($mesParams[0]==0){//parametre manquant
-			echo $mesParams[1];
+	//vérifie si les données ne sont déjà dans la base;
+	$test=$bdd->query('SELECT count(*) as nb from rel_patient_traitement where numpat="'.$_GET['choixid'].'" and numttt="'.$_GET['choixttt'].'" and  datedeb="'.$_GET['datedeb'].'" ');
+	$count = $test->fetch();
+
+	if($count['nb']==0){
+		if($_GET['datedeb']>$_GET['datefin']){
+			echo 'La date de fin est antérieure à la date de début ! Veuillez recommencer !
+			<form action="formAjoutTraitementPatient.php" method="GET"
+			<div class="input-group">
+			<input class="btn btn-primary" type="submit" value="Ajouter un autre traitement">
+			</div><br/>
+			</form>';
+		}else{	
+			$req = $bdd->prepare('INSERT INTO rel_patient_traitement(numpat, numttt, datedeb, datefin) VALUES(:numpat, :numttt, :datedeb, :datefin)');
+			$req->execute(array(
+					'numpat' => $_GET['choixid'],
+					'numttt' => $_GET['choixttt'],
+					'datedeb' => $_GET['datedeb'],	
+					'datefin' => $_GET['datefin']
+					));
+
+			echo 'Vous avez ajouté le traitement '.$_GET['choixttt'].' au patient '.$_GET['choixid'].' !
+			<form action="formAjoutTraitementPatient.php" method="GET"
+			<div class="input-group">
+			<input class="btn btn-primary" type="submit" value="Ajouter un autre traitement">
+			</div><br/>
+			</form>';
 		}
-		else if($mesParams[0]==2){//parametre invalide
-			echo $mesParams[1];
-		}
-		else if($mesParams[0]==1){//parametres bons
-			$mesParams = $mesParams[1];
-			print implode(" _ ",$mesParams);
-		}
-		*/
-		/*
-		$requete = 'select * from patient;'
-		$req = $bdd->prepare($requete);
-		$req->execute(array(':p_user' => $_POST['utilisateur']));
-		$resultat = $req->fetch();
-		if($resultat){//verif si resultat
-			do {//iteration sur toutes les lignes
-				echo"<p>mmon resultatofjfiijeifhdihgdihsihgi $resultat</p>";
-			} while ($resultat = $req->fetch(););
-		}
-		else{
-			echo "<b>Erreur dans l'exécution de la requête ou zero resultat</b><br/>";
-			echo "<b>Message de mySQL: </b>".$req->errorInfo();
-		}
-		$req->closeCursor() ;
-		*/
-		print 
-		'
-		<form action="scriptAjoutTraitementPatient.php" method="GET"
-		Ville : 
-		<div class="input-group">
-		<select class="custom-select" id="choixville" name="choixville" aria-label="Example select with button addon">
-		<option selected>Ville</option>';
+	}else{
+			echo 'Ces données sont déjà dans la base !
+			<form action="formAjoutTraitementPatient.php" method="GET"
+			<div class="input-group">
+			<input class="btn btn-primary" type="submit" value="Ajouter un autre traitement">
+			</div><br/>
+			</form>';
+	}
 
-		$requete= "SELECT LIBELLECENTRE FROM ths_centre";
-		$resultat=$bdd->query($requete);
-
-		while ($ligne = $resultat->fetch()){  
-			echo "<option value=".$ligne['LIBELLECENTRE']."> ".$ligne['LIBELLECENTRE']." </option>";
-		}
-		$resultat->closeCursor();
-		
-		echo'</select></br>
-		<input class="btn btn-primary" type="submit" value="Afficher">
-  		</div>
-  		</form>';
-
-
-	
-
-
-
-
-
-		getEnd(3);
-		?>
+//fermeture elsif du test des parametres de base
+}
+	getEnd(3);
+	?>
