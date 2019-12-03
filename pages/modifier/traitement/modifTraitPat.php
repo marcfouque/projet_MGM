@@ -17,10 +17,31 @@ $mesParams = verifParams("modifTraitPat",$_GET);
 			require "../../../tools/connect.php";
 
 
-			$requete = 'UPDATE `rel_patient_traitement` SET `NUMPAT`=:nump,`NUMTTT`=:numt,`DATEDEB`=:datedeb,`DATEFIN`=:datefin';
+			$requete = 'UPDATE `rel_patient_traitement` SET `NUMPAT`=:nump,`NUMTTT`=:numt,`DATEDEB`=:datedeb,`DATEFIN`=:datefin WHERE `NUMPAT`=:nump AND `NUMTTT`=:numt AND`DATEDEB`=:datedeb';
 			$req = $bdd->prepare($requete);
-			$req->execute(array(':nump' => $_GET['$MOTCLEF.NUMPAT'], ':numt' => $_GET['$MOTCLEF.NUMTTT'], ':datedeb' => $_GET['$MOTCLEF.datedeb'], ':datefin' => $_GET['$MOTCLEF.datefin'], ));
 			
+	
+			$req->execute(array(':nump' => $_GET['numpat'], ':numt' => $_GET['numttt'], ':datedeb' => $_GET['datedeb'], ':datefin' =>(isset($_GET['datefin'])&&strlen($_GET['datefin']) != 0?$_GET['datefin']:null) ));
+			if($req->rowCount()==0){
+				print'
+				<article class="alert alert-danger" role="alert">
+				<p>La modification a échouée.
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+				</p>
+				</article>';
+			} else {
+			print'
+				<aside class="alert alert-success alertParam" role="alert">
+				<p>Les modifications ont été effectués.
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+				</p>
+				</aside>
+				';
+			}
 
 			$req->closeCursor() ;
 		} else {
@@ -32,8 +53,8 @@ $mesParams = verifParams("modifTraitPat",$_GET);
 			</p>
 			</article>';
 		}
-	}
-}
+
+		
 	
 
 	getEnd(3);

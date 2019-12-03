@@ -56,17 +56,24 @@
 					"obligatoire"=>array("idCentre"),
 					"facultatif"=>array()
 				],
+
+		"modifTraitPat"=>[
+					"obligatoire"=>array("numpat","numttt","datedeb"),
+					"facultatif"=>array("datefin")
+				],
+
 		"consultPatient"=>[
 					"obligatoire"=>array(),
-					"facultatif"=>array("numpat","prenompat","nompat")
+					"facultatif"=>array("numpat","prenompat","nompat"),
 				],	
 		"ajoutTraitPat"=>[
 					"obligatoire"=>array("choixid","choixttt","datedeb"),
 					"facultatif"=>array("datefin")
 				],
-						"suppPat"=>[
+		"suppPat"=>[
 					"obligatoire"=>array(),
 					"facultatif"=>array("numpat","prenompat","nompat")
 				],
+
 	];
 ?>
