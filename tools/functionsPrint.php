@@ -38,7 +38,7 @@
 						<button type="submit" class="btn btn-primary">Se Connecter</button>
 					</form>
 						<form class="form-inline navbar-nav ml-auto justify-content-end '.(isset($_SESSION["coco"])?'notGriffin':'griffin').'"  id="formdeco">
-							<span>'.(isset($_SESSION["coco"])?$_SESSION['coco']:'').'</span>
+							<span id="nomutil">'.(isset($_SESSION["coco"])?$_SESSION['coco']:'').'</span>
 							<button type="submit" class="btn btn-outline-success">Se Deconnecter</button>
 						</form>
 			';

@@ -43,6 +43,7 @@ $("#formauthen").submit(function(event){
             console.log("connecté");
             $( "#formauthen" ).removeClass( "notGriffin" ).addClass( "griffin" );
             $( "#formdeco" ).removeClass( "griffin" ).addClass( "notGriffin" );
+            $('#nomutil').text(donn["n"])
             console.log("remplacement form")
 
           }
