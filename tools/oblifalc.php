@@ -55,7 +55,7 @@
 		"suppCentre"=>[
 					"obligatoire"=>array("idCentre"),
 					"facultatif"=>array()
-				]
+				],
 		"consultPatient"=>[
 					"obligatoire"=>array(),
 					"facultatif"=>array("numpat","prenompat","nompat")
