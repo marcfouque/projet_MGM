@@ -18,7 +18,6 @@ if(isset($_SESSION['coco'])){
 		$req = $bdd->prepare($requete);
 
      		try {
-				echo'<p>try1</p>';
      		    $resultat=$req->execute(array(":nump"=>$mesParams[1]['numpat']));
      				$bool=5;
 		echo'<p class="display-4">La suppression a réussi, <a href="../../consulter/patient/formConsultPatient.php">retour</a></p>';

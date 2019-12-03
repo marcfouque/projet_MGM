@@ -63,6 +63,10 @@
 		"ajoutTraitPat"=>[
 					"obligatoire"=>array("choixid","choixttt","datedeb"),
 					"facultatif"=>array("datefin")
-				]
+				],
+						"suppPat"=>[
+					"obligatoire"=>array(),
+					"facultatif"=>array("numpat","prenompat","nompat")
+				],
 	];
 ?>
