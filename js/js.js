@@ -22,6 +22,27 @@ $('#chi').ready(function(){
 });
 
 
+$('#teck').ready(function(){
+	setInterval(function(){
+		$("#teck").animate({left: '+=30px'}, 0);
+		if($("#teck").is(':offscreen')){
+			console.log("offset");
+			var l = -50;
+			$("#teck").css({left:l})
+			//$("#chi").css({ top:50px, left: 0px});
+
+		}
+	}, 100);
+});
+
+
+
+/*
+$('#chi').click(function(){
+	alert("Vous venez de casser php");
+});
+*/
+
 $("#formauthen").submit(function(event){
     // arrete l'envoi
     event.preventDefault();
@@ -91,4 +112,6 @@ $("#formdeco").submit(function(event){
     });
 });
 
-document.addEventListener("load",()=>{alert("refresh")})
+document.querySelector('#teck').addEventListener("click",()=>{
+  document.querySelector("audio").play();
+});

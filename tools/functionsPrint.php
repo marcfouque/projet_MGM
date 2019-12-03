@@ -104,6 +104,8 @@
 				  </div>
 				</nav>
 				<img src="'.$prefix.'resources/chi.gif" id="chi" style="width:200px;" >
+				<img src="'.$prefix.'resources/teckel.gif" id="teck" >
+				<audio src="'.$prefix.'resources/miaou.mp3"></audio>
 
 		';
 
