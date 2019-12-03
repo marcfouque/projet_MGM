@@ -34,7 +34,7 @@ require "../../../tools/connect.php";
 		*/
 		print 
 		'
-		<form action="scriptConsultationCentre.php" method="GET"
+		<form class = "w-50 p-3, mx-auto" action="scriptConsultationCentre.php" method="GET"
 		Ville : 
 		<div class="input-group">
 		<select class="custom-select" id="choixville" name="choixville" aria-label="Example select with button addon">

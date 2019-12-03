@@ -17,22 +17,24 @@ $mesParams = verifParams("consultTrait",$_GET);
 		else if($mesParams[0]==1){//parametres bons
       require "../../../tools/connect.php";
 
-      $requete = "SELECT NOM, PRENOM, R.NUMTTT, LIBELLETTT, DATEDEB, DATEFIN FROM patient P INNER JOIN (rel_patient_traitement R INNER JOIN ths_traitement T on R.NUMTTT = T.NUMTTT) ON P.NUMPAT = R.NUMPAT WHERE LIBELLETTT like :nom_traitement";
+      $requete = "SELECT P.NUMPAT, NOM, PRENOM, R.NUMTTT, LIBELLETTT, DATEDEB, DATEFIN FROM patient P INNER JOIN (rel_patient_traitement R INNER JOIN ths_traitement T on R.NUMTTT = T.NUMTTT) ON P.NUMPAT = R.NUMPAT WHERE LIBELLETTT like :nom_traitement";
      // $req = $bdd->prepare($requete);
      // $req->execute(array(':nom_traitement' => $_GET['libtrait']));
         //$NbreData = $req->rowCount();
       //$resultat = $req->fetch();
 
       echo '<h1>Vous avez recherché : '.$_GET['libtrait'].'</h1>';
-      $formModifLigne= '<form class="container modal-body" action="../../modifier/examen/modifExamPat.php" method="get">
+      $formModifLigne= '<form class="container modal-body" action="../../modifier/traitement/modifTraitPat.php" method="get">
                         <div class="modal-body">
+                        <input type="hidden" name=""
                           <div class="form-group">
                             <label for="nompat" >Nom du patient</label>
-                            <input type="text" class="form-control" name="nompat" placeholder="saisissez le numéro du traitement" value="§MOTCLEF.nom" >
+                            <input type="text" class="form-control" name="nompat" placeholder="saisissez le nom du patient" value="§MOTCLEF.nom" >
+
                           </div>
                           <div class="form-group">
-                            <label for="prenompat" >Nom du traitement</label>
-                            <input type="text" class="form-control" name="prenompat" placeholder="saisissez le libellé du traitement" value="§MOTCLEF.prenom" >
+                            <label for="prenompat" >Prénom du patient</label>
+                            <input type="text" class="form-control" name="prenompat" placeholder="saisissez le prénom du patient" value="§MOTCLEF.prenom" 
                           </div>
                            <div class="form-group">
                             <label for="libttt" >Nom du traitement</label>

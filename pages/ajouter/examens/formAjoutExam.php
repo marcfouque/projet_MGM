@@ -38,19 +38,20 @@
 				}
 				else messageInsert("Examen :".$mesParams[1]['numexam'].", Patient :".$mesParams[1]['numpat'].", Date :".$mesParams[1]['datexam'].(isset($mesParams[1]['resexam'])?", Resultat:".$mesParams[1]['resexam']:"")."<br/>Examen ajouté au patient",1);
 		} catch (PDOException $e) {
-		    if ($e->getCode() == 1062 or ($req3->errorInfo())[1]==1062) {
+			$temp=$req3->errorInfo();
+		    if ($e->getCode() == 1062 or temp[1]==1062) {
 		         messageInsert("Le patient ".$mesParams[1]['numpat']." a déjà effectué l' examen ".$mesParams[1]['numexam']." à la date ".$mesParams[1]['datexam']."<br/> <a href='../../consulter/examen/formConsultExamen.php?numexam=".$mesParams[1]['numexam']."&numpat=".$mesParams[1]['numpat']."&datexam=".$mesParams[1]['datexam']."&choixreq=1'>Modifier l'examen</a>");
 		    }
-				else if ($e->getCode() == 1452 or ($req3->errorInfo())[1]==1452) {
+				else if ($e->getCode() == 1452 or temp[1]==1452) {
  		        messageInsert("une des valeurs transmises ne correspond pas à un patient ou un examen présent dans la base.<br/><a href='#'>Ajouter patient</a><br/><a href='#'>Ajouter Examen</a>");
  		    }
 				else messageInsert("Une erreur s'est produite<br><b>".implode(' __ ',$req3->errorInfo())."</b>");
 		}
 
 		$req3->closeCursor() ;
-		print $requete3;
-		print ($req3->errorInfo())[1];
-		print ($req3->errorInfo())[1]==1062;
+		//print $requete3;
+		//print ($req3->errorInfo())[1];
+		//print ($req3->errorInfo())[1]==1062;
 	}
 		print'
 			<h2>Formulaire d\'ajout d\'examen à un patient</h2>

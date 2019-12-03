@@ -1,5 +1,3 @@
-<!DOCTYPE Html>
-<html>
 <?php 
 		session_start(); 
 		require "../../../tools/functionsPrint.php";
@@ -50,4 +48,4 @@
 		
 		getEnd(3);
 		?>
-</html>
+
