@@ -24,37 +24,44 @@ $mesParams = verifParams("ajoutTraitThs",$_GET);
 				$req->execute(array(':tttadd' => $_GET['treatadd']));
 
 				print'
-				<aside class="alert alert-success alertParam" role="alert">
-				<p>Traitement : '.$_GET['treatadd'].' ajouté au Thesaurus.
+				<article class="alert alert-success" role="alert">
 				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 				<span aria-hidden="true">&times;</span>
 				</button>
-				</p>
-				</aside>
+				<h4 class="alert-heading">Bien joué !</h4>
+				<p>Le traitement "'.$_GET['treatadd'].'" a bien été ajouté.</p>
+				<hr>
+				<a href="../../ajouter/traitementThesaurus/formAjoutTraitementThesaurus.php"> Retour au formulaire </a>
+				</article>
 				';
+
 			} catch (PDOException $e){
 				print'
 				<article class="alert alert-danger" role="alert">
-				<p>Le traitement est déjà présent.
+				<p>L\'ajout du traitement a échoué
 				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 				<span aria-hidden="true">&times;</span>
 				</button>
 				</p>
+				<a href = "../../ajouter/traitementThesaurus/formAjoutTraitementThesaurus.php">Retour au formulaire</a>
 				</article>
 				';
-			
+
 			}
 
 			$req->closeCursor();
 		} else {
-			print'<article class="alert alert-warning" role="alert">
-			<p>Vous n\'êtes pas connectés
+			print'
+
+			<article class="alert alert-warning" role="alert">
+			<p>Vous n\'êtes pas connectés !
 			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 			<span aria-hidden="true">&times;</span>
 			</button>
 			</p>
+			<a href = "../../ajouter/traitementThesaurus/formAjoutTraitementThesaurus.php">Retour au formulaire</a>
 			</article>';
 		}
 
-getEnd(3);
+		getEnd(3);
 		?>

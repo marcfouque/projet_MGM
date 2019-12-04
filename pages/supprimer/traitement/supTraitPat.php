@@ -31,7 +31,7 @@ $mesParams = verifParams("supTraitPat",$_GET);
 				</button>
 				</p>
 				</article>';
-				echo'<p><a href=../..//consulter/traitement/scriptConsultationTraitement.php?libtrait='.$_GET['libtrait'].'>Retour aux résultats</a></p>';
+				echo'<p><a href=../../consulter/traitement/scriptConsultationTraitement.php?libtrait='.$_GET['libtrait'].'>Retour aux résultats</a></p>';
 			} else {
 			print'
 				<aside class="alert alert-success alertParam" role="alert">
