@@ -10,15 +10,14 @@ if(isset($_SESSION['coco'])){
      require "../../../tools/connect.php";
 
         //construction requete
-        $requete = "update ths_centre set idCentre = :idCentre, libelleCentre = :libCentre where idCentre = :idCentre;";
+        $requete = "update patient set idCentre = :idCentre where nom=:nompat and prenom=:prenompat and ddn=:ddn;";
 
      		$req = $bdd->prepare($requete);
-
      		try {
-     		    $resultat=$req->execute(array(":idCentre"=>$mesParams[1]['idCentre'],":libCentre"=>$mesParams[1]['libCentre']));
+            $resultat=$req->execute(array(":nompat"=>$mesParams[1]['nompat'],":prenompat"=>$mesParams[1]['prenompat'],":ddn"=>$mesParams[1]['ddn'],":idCentre"=>$mesParams[1]['idCentre']));
      				$bool=false;
             //adresse retour à changer
-            header('Location: ../../consulter/examen/formConsultExamen.php?numexam='.$mesParams[1]['numexam'].'&choixreq=0');
+            header('Location: ../../consulter/centre/formConsultCentre.php');
             exit;
      		} catch (PDOException $e) {
      		   //une erreur s'est produite, $bool le signifiera
@@ -33,7 +32,7 @@ if(isset($_SESSION['coco'])){
     echo $bool;
     echo $mess;
     //if($mesParams[0]==1)echo'<p><b>'.$mesParams[1].'</b></p>';
-    echo'<p><b>'.implode(" ",$mesParams[1]).'</b></p>';
+    echo'<p><b>'.$mesParams[1].'</b></p>';
      echo'<p class="display-4">La modification a échoué, <a href="../../consulter/examen/formConsultExamen.php">retour</a></p>';
      getEnd(3);
    }

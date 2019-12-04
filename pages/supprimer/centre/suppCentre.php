@@ -11,15 +11,15 @@ if(isset($_SESSION['coco'])){
 
         //construction requete
         //$requete = "update ths_examen set numexam = :nume, libellexam = :lab, valmin = :minexam, valmax = :maxexam where numexam = :nume;";
-        $requete = "delete from ths_centre where idcentre = :idCentre; ";
+        $requete = "UPDATE patient SET idcentre = null WHERE NOM=:nompat and PRENOM=:prenompat and ddn=:ddnpat;";
 
      		$req = $bdd->prepare($requete);
 
      		try {
-     		    $resultat=$req->execute(array(":idCentre"=>$mesParams[1]['idCentre']));
+     		    $resultat=$req->execute(array(":nompat"=>$mesParams[1]['nompat'],":prenompat"=>$mesParams[1]['prenompat'],":ddnpat"=>$mesParams[1]['ddn']));
      				$bool=false;
             //addresse à changer
-            header('Location: ../../consulter/examen/formConsultCentre.php?idCentre='.$mesParams[1]['idCentre']);
+            header('Location: ../../consulter/centre/formConsultCentre.php');
             exit;
      		} catch (PDOException $e) {
      		   //une erreur s'est produite, $bool le signifiera

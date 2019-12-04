@@ -13,21 +13,6 @@
 	pour date, format YYYY-MM-DD
 	*/
 	$parametres = [
-		"nomParam1"=>[
-			"type"=>"string",
-			"valeurs"=>array("Oui","Non","Peut-etre"),
-		],
-		"nomParam2"=>[
-			"type"=>"entier",
-			"bornes"=>array(0,null),
-		],
-		"nomParam3"=>[
-			"type"=>"booleen",
-		],
-		"nomParam4"=>[
-			"type"=>"date",
-			"bornes"=>array('1900-01-01','1999-12-31'),
-		],
 		"numpat"=>[
 			"type"=>"entier",
 			"bornes"=>array(0,null)
@@ -89,7 +74,7 @@
 		"choixttt"=>[
 			"type"=>"entier",
 			"bornes"=>array(0,null),
-		],		
+		],
 		"datedeb"=>[
 			"type"=>"date",
 			"bornes"=>array('1900-01-01',null),
@@ -107,7 +92,7 @@
 			"type"=>"entier",
 			"bornes"=>array(0,null),
 		],
-				"ddn"=>[
+		"ddn"=>[
 			"type"=>"date",
 		],
 		"sexe"=>[

@@ -48,11 +48,11 @@
 					"facultatif"=>array()
 				],
 		"modifCentre"=>[
-					"obligatoire"=>array("idCentre"),
-					"facultatif"=>array("libCentre")
+					"obligatoire"=>array("nompat","prenompat","ddn","idCentre"),
+					"facultatif"=>array()
 				],
 		"suppCentre"=>[
-					"obligatoire"=>array("idCentre"),
+					"obligatoire"=>array("nompat","prenompat","ddn"),
 					"facultatif"=>array()
 				],
 		"modifTraitPat"=>[
@@ -62,7 +62,7 @@
 		"consultPatient"=>[
 					"obligatoire"=>array(),
 					"facultatif"=>array("numpat","prenompat","nompat"),
-				],	
+				],
 		"ajoutTraitPat"=>[
 					"obligatoire"=>array("choixid","choixttt","datedeb"),
 					"facultatif"=>array("datefin")
@@ -78,6 +78,6 @@
 		"modifPat"=>[
 					"obligatoire"=>array(),
 					"facultatif"=>array("numpat","prenompat","nompat","ddn","consang","nbame","pdsnaiss","taillenaiss","pcnaiss","sexe")
-				],	
+				],
 	];
 ?>
