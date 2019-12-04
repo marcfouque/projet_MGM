@@ -21,7 +21,7 @@ $('#chi').ready(function(){
 	}, 310);
 });
 
-
+/*
 $('#teck').ready(function(){
 	setInterval(function(){
 		$("#teck").animate({left: '+=30px'}, 0);
@@ -34,7 +34,7 @@ $('#teck').ready(function(){
 		}
 	}, 100);
 });
-
+*/
 
 
 /*
