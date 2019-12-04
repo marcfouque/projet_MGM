@@ -74,6 +74,10 @@
 					"obligatoire"=>array(),
 					"facultatif"=>array("numpat","prenompat","nompat")
 				],
+		"supTraitPat"=>[
+					"obligatoire"=>array("numpat","numttt","datedeb"),
+					"facultatif"=>array("datefin")
+				],
 
 	];
 ?>
