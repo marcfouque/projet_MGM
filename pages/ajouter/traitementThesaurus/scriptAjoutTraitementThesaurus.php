@@ -8,7 +8,14 @@ require "../../../tools/connect.php";
 
 $mesParams = verifParams("ajoutTraitThs",$_GET);
 		if($mesParams[0]==0){//parametre manquant
-			echo $mesParams[1];
+			'<aside class="alert alert-warning alertParam container-fluid " role="alert">
+					<p class="display-4"> Parametre manquant. <a href="#'.$mesParams[2].'"> Voir le paramètre manquant</a>
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true" class="display-4">&times;</span>
+						</button>
+					</p>
+				</aside>'
+			;
 		}
 		else if($mesParams[0]==2){//parametre invalide
 			echo $mesParams[1];

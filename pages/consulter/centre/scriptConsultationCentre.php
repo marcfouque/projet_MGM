@@ -7,108 +7,59 @@
 		require"../../../tools/functionsPrint.php";
 		require "../../../tools/functionsParams.php";
 		getStart(3);
-
+require "../../../tools/connect.php";
 		$mesParams = verifParams("consultCentre",$_GET);
-		//modifier oblifalc, descParam, functionsParam
+		
 		if($mesParams[0]==0){//parametre manquant
-			echo $mesParams[1];
+			echo "coucou";
 		}
 		else if($mesParams[0]==2){//parametre invalide
-			echo $mesParams[1];
+			echo "coucou";
 		}
 		else if($mesParams[0]==1){//parametres bons
-			require "../../../tools/connect.php";
-			//$mesParams = $mesParams[1];
-			//print implode(" _ ",$mesParams);
+			
 
 
-		$requete = 'SELECT `PRENOM`,`NOM`,`DDN` FROM `patient` INNER JOIN ths_centre ON patient.IDCENTRE = ths_centre.IDCENTRE WHERE ths_centre.LIBELLECENTRE LIKE :ville';
-		$req = $bdd->prepare($requete);
-		$req->execute(array(':ville' => $_GET['choixville']));
-		$resultat = $req->fetch();
-		if($resultat){//verif si resultat
+		$requete = 'SELECT `PRENOM`,`NOM`,`DDN`, LIBELLECENTRE FROM `patient` INNER JOIN ths_centre ON patient.IDCENTRE = ths_centre.IDCENTRE WHERE ths_centre.LIBELLECENTRE LIKE :ville';
 
-    echo '<h3>Liste des patients</h3>
-    <div class="table-responsive">
-    <table class="table table-hover">
+		
 
-    <thead>
-    <tr>
-      <td>Nom</td>
-      <td>Prénom</td>
-      <td>Date de naissance</td>
-      <td>Actions</td>
-    </tr>
-    </thead>
-    ';
+		echo '<h1>Vous avez recherché : '.$_GET['choixville'].'</h1>';
+      $formModifLigne= '<form class="container modal-body" action="../../modifier/centre/modifierCentre.php" method="get">
+      <div class="modal-body">
+      <input type="hidden" name="numpat" value="§MOTCLEF.numpat"/>
+      <div class="form-group">
+      <label for="nompat" >Nom du patient</label>
+      <input type="text" class="form-control" name="nompat" placeholder="saisissez le nom du patient" value="§MOTCLEF.nom" />
+      </div>
+      <div class="form-group">
+      <label for="prenompat" >Prénom du patient</label>
+      <input type="text" class="form-control" name="prenompat" placeholder="saisissez le prénom du patient" value="§MOTCLEF.prenom" />
+      </div>
+      <div class="form-group">
+      <label for="libttt" >Nom du traitement</label>
+      <input type="text" class="form-control" name="libellecentre" placeholder="saisissez le libellé du traitement" value="§MOTCLEF.libellecentre" />
+      </div>
+      
+      </div>
+      <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+      <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+      </div>
+      </form>';
 
-    do {//iteration sur toutes les lignes
-      //debut ligne tableau
-      echo'<tr>';
-      echo'<td>'.$resultat[0].'</td>';
-      echo'<td>'.$resultat[1].'</td>';
-      echo'<td>'.$resultat[2].'</td>
-      <td>
-        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-          <button type="button" data-toggle="modal" data-target="'.$resultat[0].$resultat[1].'modif" class="btn btn-secondary">Modifier</button>
-          <button type="button" data-toggle="modal" data-target="'.$resultat[0].$resultat[1].'supp" class="btn btn-secondary">Supprimer</button>
-        </div>
-				<aside class="modal fade" id="'.$resultat[0].$resultat[1].'modif" tabindex="-1" role="dialog" aria-labelledby="'.$resultat[0].$resultat[1].'modifLabel" aria-hidden="true">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title" id="'.$resultat[0].$resultat[1].'modifLabel">Modification</h5>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<form class="container modal-body" action="../../modifier/centre/modifCentre.php" method="get">
-								<div class="modal-body">
-									<input type="number" class="form-control" name="idcentre">
-									<p>coucou</p>
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-									<button type="submit" class="btn btn-primary">Supprimer l\'enregistrement</button>
-								</div>
-							</form>
-						</div>
-					</div>
-				</aside>
-				<aside class="modal fade" id="'.$resultat[0].$resultat[1].'supp" tabindex="-1" role="dialog" aria-labelledby="'.$resultat[0].$resultat[1].'suppLabel" aria-hidden="true">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title" id="'.$resultat[0].$resultat[1].'suppLabel">Modification</h5>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<form class="container modal-body" action="../../supprimer/centre/suppCentre.php" method="get">
-								<div class="modal-body">
-									<input type="hidden" class="form-control" name="idcentre">
-									<p>coucou</p>
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-									<button type="submit" class="btn btn-primary">Supprimer l\'enregistrement</button>
-								</div>
-							</form>
-						</div>
-					</div>
-				</aside>
-      </td>
-      </tr>';
-    } while ($resultat = $req->fetch());
+      $formSuppLigne = '<form class="container modal-body" action="../../supprimer/centre/suppCentre.php" method="get">
+      <div class="modal-body">
+      <input type="hidden" class="form-control" name="numttt">
+      <p>§MOTCLEFS</p>
+      </div>
+      <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+      <button type="submit" class="btn btn-primary">Supprimer l\'enregistrement</button>
+      </div>
+      </form>';        
 
-    print'
-    </table>
-    </div>
-    ';
-} else {
-      echo "Aucun traitement n'a été trouvé <br/>";
-   }
-   $req->closeCursor() ;
+         getResultatRequete($requete,array(':ville' => $_GET['choixville']),array("nom","prenom","ddn"),$formModifLigne,$formSuppLigne,$bdd);
   }
 
 getEnd(3);
