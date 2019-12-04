@@ -40,4 +40,5 @@ L'ajout, la Modification et la Suppression d'entités nécessite d'etre connect�
 <p>Ajouter un utilisateur grace à la commande
 ```
 mysql INSERT INTO utilisateur VALUES ('nomdelutilisateur',cryptMdp('motdepasse'))
-```</p>
+```
+</p>
