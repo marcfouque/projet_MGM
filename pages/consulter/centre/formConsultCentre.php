@@ -10,8 +10,7 @@ require "../../../tools/connect.php";
 		<form class = "container" action="scriptConsultationCentre.php" method="GET"
 		<legend><h4>Consulter un centre</h4></legend>
 		<div class="form-group">
-		<select class="form-control" id="choixville" name="choixville">
-		<option selected>Ville</option>';
+		<select class="form-control" id="choixville" name="choixville">';
 
 		$requete= "SELECT LIBELLECENTRE FROM ths_centre";
 		$resultat=$bdd->query($requete);

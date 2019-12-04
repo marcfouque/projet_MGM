@@ -7,7 +7,7 @@
 		require"../../../tools/functionsPrint.php";
 		require "../../../tools/functionsParams.php";
 		getStart(3);
-require "../../../tools/connect.php";
+
 		$mesParams = verifParams("consultCentre",$_GET);
 		
 		if($mesParams[0]==0){//parametre manquant
@@ -17,7 +17,7 @@ require "../../../tools/connect.php";
 			echo "coucou";
 		}
 		else if($mesParams[0]==1){//parametres bons
-			
+			require "../../../tools/connect.php";
 
 
 		$requete = 'SELECT `PRENOM`,`NOM`,`DDN`, LIBELLECENTRE FROM `patient` INNER JOIN ths_centre ON patient.IDCENTRE = ths_centre.IDCENTRE WHERE ths_centre.LIBELLECENTRE LIKE :ville';
