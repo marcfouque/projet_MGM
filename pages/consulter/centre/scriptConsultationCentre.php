@@ -20,7 +20,7 @@
 			require "../../../tools/connect.php";
 
 
-		$requete = 'SELECT `PRENOM`,`NOM`,`DDN`, LIBELLECENTRE FROM `patient` INNER JOIN ths_centre ON patient.IDCENTRE = ths_centre.IDCENTRE WHERE ths_centre.LIBELLECENTRE LIKE :ville';
+		$requete = 'SELECT `PRENOM`,`NOM`,`DDN`, patient.IDCENTRE, LIBELLECENTRE FROM `patient` INNER JOIN ths_centre ON patient.IDCENTRE = ths_centre.IDCENTRE WHERE ths_centre.LIBELLECENTRE LIKE :ville';
 
 		
 
@@ -50,7 +50,8 @@
 
       $formSuppLigne = '<form class="container modal-body" action="../../supprimer/centre/suppCentre.php" method="get">
       <div class="modal-body">
-      <input type="hidden" class="form-control" name="numttt">
+      <input type="hidden" class="form-control" value="§MOTCLEF.idCentre" name="idCentre">
+      <input type="hidden" class="form-control" value="§MOTCLEF.libCentre" name="libCentre">
       <p>§MOTCLEFS</p>
       </div>
       <div class="modal-footer">
