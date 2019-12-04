@@ -2,14 +2,12 @@
 #############################
 //description des restrictions des parametres
 #############################
-
 	/*
 	descriptif des valeurs possibles suivant les clefs
 	nom clef	-	type valeur	-	valeur possibles	-	description
 	"type"	-	string	-	["entier","double","string","date","booleen"]	-	type de la variable passé en parametre, obligatoire (pour la valeur date, ne sera verifier que la conformité du string en date)
 	"valeurs"	-	array de type de "type"	-	[array()]	-	toutes les valeurs que peut prendre le parametre
 	"bornes"	-	 couple de numeric ou date	-	array(numeric,numeric)/array(date,date)	-	bornes [inferieur,superieur] ouvertes ne s'appliquent qu'a des numerics (eniter,double,float) ou à des dates (mettre string de de date), si pas de limite sur une des bornes alors null
-
 	Seul "type" est obligatoire
 	"valeurs" disjoint de "bornes" #ontologie
 	pour date, format YYYY-MM-DD
@@ -103,10 +101,13 @@
 			"type"=>"string",
 		],
 		"prenompat"=>[
-<<<<<<< HEAD
-			"type"=>"string"
+			"type"=>"string",
 		],
-		"ddn"=>[
+		"numttt"=>[
+			"type"=>"entier",
+			"bornes"=>array(0,null),
+		],
+				"ddn"=>[
 			"type"=>"date",
 		],
 		"sexe"=>[
@@ -133,14 +134,5 @@
 			"type"=>"entier",
 			"bornes"=>array(0,null)
 		]
-
-=======
-			"type"=>"string",
-		],
-		"numttt"=>[
-			"type"=>"entier",
-			"bornes"=>array(0,null),
-		],
->>>>>>> 9617d5d78fd74983993445e201c7c406e35b4664
 	]
 ?>

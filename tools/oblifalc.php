@@ -2,7 +2,6 @@
 #############################
 //Enumération des parametres obligatoires et falcutatifs par pages
 #############################
-
 	/*
 	-mettre un nom de page (unique) qui sera appelé dans le fichier php qui affichera la page
 	-mettre dans les array le nom des parametres obligatoire et/ou facultatif
@@ -56,12 +55,10 @@
 					"obligatoire"=>array("idCentre"),
 					"facultatif"=>array()
 				],
-
 		"modifTraitPat"=>[
 					"obligatoire"=>array("numpat","numttt","datedeb"),
 					"facultatif"=>array("datefin")
 				],
-
 		"consultPatient"=>[
 					"obligatoire"=>array(),
 					"facultatif"=>array("numpat","prenompat","nompat"),
@@ -74,17 +71,13 @@
 					"obligatoire"=>array(),
 					"facultatif"=>array("numpat","prenompat","nompat")
 				],
-<<<<<<< HEAD
-		"modifPat"=>[
-					"obligatoire"=>array(),
-					"facultatif"=>array("numpat","prenompat","nompat","ddn","consang","nbame","pdsnaiss","taillenaiss","pcnaiss","sexe")
-				],	
-=======
 		"supTraitPat"=>[
 					"obligatoire"=>array("numpat","numttt","datedeb"),
 					"facultatif"=>array("datefin")
 				],
->>>>>>> 9617d5d78fd74983993445e201c7c406e35b4664
-
+		"modifPat"=>[
+					"obligatoire"=>array(),
+					"facultatif"=>array("numpat","prenompat","nompat","ddn","consang","nbame","pdsnaiss","taillenaiss","pcnaiss","sexe")
+				],	
 	];
 ?>
