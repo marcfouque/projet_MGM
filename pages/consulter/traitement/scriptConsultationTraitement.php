@@ -19,7 +19,7 @@ $mesParams = verifParams("consultTrait",$_GET);
       require "../../../tools/connect.php"; // connexion à la base de données
 
       $requete = "SELECT P.NUMPAT, NOM, PRENOM, R.NUMTTT, LIBELLETTT, DATEDEB, DATEFIN FROM patient P INNER JOIN (rel_patient_traitement R INNER JOIN ths_traitement T on R.NUMTTT = T.NUMTTT) ON P.NUMPAT = R.NUMPAT WHERE LIBELLETTT like :nom_traitement";
-     
+
 
       echo '<h1>Vous avez recherché : '.$_GET['libtrait'].'</h1>';
       $formModifLigne= '<form class="container modal-body" action="../../modifier/traitement/modifTraitPat.php" method="get">
@@ -55,15 +55,15 @@ $mesParams = verifParams("consultTrait",$_GET);
 
       $formSuppLigne = '<form class="container modal-body" action="../../supprimer/traitement/supTraitPat.php" method="get">
       <div class="modal-body">
-      <input type="hidden" class="form-control" name="numttt">
-      <input type="hidden" class="form-control" name="numpat">
+      <input type="hidden" class="form-control" value="§MOTCLEF.numttt" name="numttt">
+      <input type="hidden" class="form-control" value="§MOTCLEF.numpat" name="numpat">
       <p>§MOTCLEFS</p>
       </div>
       <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
       <button type="submit" class="btn btn-primary">Supprimer l\'enregistrement</button>
       </div>
-      </form>';           
+      </form>';
       getResultatRequete($requete,array(':nom_traitement' => $_GET['libtrait']),array("nom","prenom","datedeb", "datefin"),$formModifLigne,$formSuppLigne,$bdd);
 
 
