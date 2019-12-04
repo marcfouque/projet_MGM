@@ -57,7 +57,7 @@ $mesParams = verifParams("modifTraitPat",$_GET);
 		}
 		
 		
-		echo'<p><a href=../..//consulter/traitement/scriptConsultationTraitement.php?libtrait='.$_GET['libtrait'].'>Retour aux résultats</a></p>';
+		echo'<p><a href=../../consulter/traitement/scriptConsultationTraitement.php?libtrait='.$_GET['libtrait'].'>Retour aux résultats</a></p>';
 		
 	
 

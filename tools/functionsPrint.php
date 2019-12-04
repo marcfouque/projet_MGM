@@ -104,8 +104,6 @@
 				  </div>
 				</nav>
 				<img src="'.$prefix.'resources/chi.gif" id="chi" style="width:200px;" >
-				<img src="'.$prefix.'resources/teckel.gif" id="teck" >
-				<audio src="'.$prefix.'resources/miaou.mp3"></audio>
 
 		';
 
@@ -191,9 +189,9 @@
 					array_push($colonnesVisiIndex,$i);
 				}
 			}
-			//$colonnes[$req->columnCount()]="Actions";
+			//ajout d'actions à la liste des colonnes
 			$colonnesVisi[count($colonnesVisi)]="Actions";
-			//echo implode("_",$colonnesVisi);
+			//début du tableau de résultat
 			print'
 				<div class="table-responsive">
 			  	<table class="table table-hover">
@@ -201,6 +199,7 @@
 			print'
 				<thead>
 			    <tr>';
+					//init du header du tableau (labels colonnes)
 			foreach($colonnesVisi as $c)echo'<th scope="col">'.$c.'</th>';
 			print'
 				</tr>
@@ -217,12 +216,11 @@
 
 				echo'<tr>';
 				for($i=0;$i<count($colonnesVisi)-1;$i++){//iterationàà traverslesResultat
-					//echo'<td>'.$resultat[$i].'</td>';
-					//$idunique.=$resultat[$i];
 					echo'<td>'.$resultat[$colonnesVisiIndex[$i]].'</td>';
 					$idunique.=$resultat[$colonnesVisiIndex[$i]];
 				}
 				$idunique = 'id'.str_replace(",","",str_replace("-","",$idunique));
+				//boutons d'actions modifier/supprimer (liés à leur modal respectif)
 				print'
 				<td>
 					<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
@@ -268,29 +266,23 @@
 				';
 
 				echo'</tr>';
+				//itération
 			} while ($resultat = $req->fetch());
 
 			print'
 			 </table>
 		 </div>
 			';
-
+			//print des modals en dehors du tableau
 			print '<div>'.$modalsModif.'</div>';
 			print '<div>'.$modalsSupp.'</div>';
 		}
-		else{
+		else{//si pas de résultat
 			echo "<b>Zéro resultat pour cette requète</b><br/>";
 			//echo "<b>Message de mySQL: </b>".implode("\n",$req->errorInfo());
 			echo "<a href='formConsultExamen_bis.php'><p> Retour au formulaire</p></a>";
 		}
-
-
-
-
 		$req->closeCursor() ;
-
-
-
 	}
 
 ?>

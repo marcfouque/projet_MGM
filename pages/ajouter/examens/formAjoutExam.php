@@ -17,7 +17,7 @@
 			</aside>
 		';
 	}
-	echo'<h1>Consultation examens</h1>';
+	echo'<h1>Ajout examen</h1>';
 	//si requete vierge
 	$mesParams = (count($_GET)==0?array(99,"0 parametre"):verifParams("ajoutExamPat",$_GET));
 	if($mesParams[0]==1 and isset($_SESSION['coco']) ){//si les parametres sont valides
