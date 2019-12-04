@@ -68,8 +68,8 @@
 					"facultatif"=>array("datefin")
 				],
 		"suppPat"=>[
-					"obligatoire"=>array(),
-					"facultatif"=>array("numpat","prenompat","nompat")
+					"obligatoire"=>array("numpat"),
+					"facultatif"=>array()
 				],
 		"supTraitPat"=>[
 					"obligatoire"=>array("numpat","numttt","datedeb"),
