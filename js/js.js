@@ -111,7 +111,8 @@ $("#formdeco").submit(function(event){
         }
     });
 });
-
+/*
 document.querySelector('#teck').addEventListener("click",()=>{
   document.querySelector("audio").play();
 });
+*/

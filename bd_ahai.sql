@@ -25,7 +25,6 @@ SET time_zone = "+00:00";
 --
 DROP FUNCTION IF EXISTS getClef;
 DROP FUNCTION IF EXISTS CryptMdp;
-DROP FUNCTION IF EXISTS DecryptMdp;
 
 DELIMITER |
 CREATE FUNCTION getClef () RETURNS VARCHAR(100)
@@ -36,13 +35,8 @@ END;
 CREATE FUNCTION CryptMdp (mdp VARCHAR(50)) RETURNS blob
 BEGIN
     DECLARE mdpCrypte blob;
-    SET mdpCrypte=AES_ENCRYPT(mdp,getClef());
+    SET mdpCrypte=SHA2(CONCAT(mdp,getClef()),256);
     RETURN mdpCrypte;
-END;
-    |
-CREATE FUNCTION DecryptMdp (mdpCrypte blob) RETURNS VARCHAR(100)
-BEGIN
-    RETURN aes_decrypt(mdpCrypte,getClef());
 END;
     |
 DELIMITER ;
@@ -3623,23 +3617,8 @@ INSERT INTO `rel_patient_traitement` (`NUMPAT`, `NUMTTT`, `DATEDEB`, `DATEFIN`) 
 
 -- --------------------------------------------------------
 
-
-
-
-
-
--- gestion avec procedures triggers prevue
--- select aes_encrypt('marco','Evian&Chi1'), aes_decrypt(aes_encrypt('marco','Evian&Chi1'),'Evian&Chi1')
-
--- DELIMITER $$
--- CREATE PROCEDURE getClefk(OUT clef varchar(50))
---  BEGIN
---    Select 'Evian&Chi1';
---  END$$
--- DELIMITER ;
-
 --
--- INSERT juste pour l'exmeple
+-- INSERT juste pour l'EXEMPLE
 -- A NE PAS FAIRE (sécurité des données, mdp, et clefs)
 --
 INSERT INTO `utilisateur` (`nomutilisateur`, `motdepasseU`) VALUES
