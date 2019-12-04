@@ -12,23 +12,20 @@
 				$p=$_POST['p'];
 
 				require "connect.php";
-				$req = $bdd->prepare("select * from utilisateur where nomutilisateur=:n and motdepasseU=AES_ENCRYPT(:p,'Evian&Chi1');");
-				//$req = $bdd->prepare("select * from utilisateur where nomutilisateur='marc' and motdepasseU=AES_ENCRYPT('jemaime','Evian&Chi1');");
+				$req = $bdd->prepare("select * from utilisateur where nomutilisateur=:n and motdepasseU=cryptMdp(:p);");
 				$req->execute(array(":n"=>$n,":p"=>$p));
-				//$req->execute();
 				$resultat = $req->fetch();
 
-				if($resultat){
+				if($resultat){//si bon
 						$_SESSION['coco']=$resultat[0];
 						echo'1';
 				}
-				else{
+				else{//si erroné
 					echo'2';
 				}
 			}
-
-			else{
-				echo 0;
+			else{//si pas de params
+				echo '0';
 			}
 
 ?>

@@ -1,13 +1,13 @@
-<?php session_start(); 
+<?php session_start();
 
 		//Script consultation centre
 
 
-		
+
 		require"../../../tools/functionsPrint.php";
 		require "../../../tools/functionsParams.php";
 		getStart(3);
-		
+
 		$mesParams = verifParams("consultCentre",$_GET);
 		//modifier oblifalc, descParam, functionsParam
 		if($mesParams[0]==0){//parametre manquant
@@ -20,18 +20,18 @@
 			require "../../../tools/connect.php";
 			//$mesParams = $mesParams[1];
 			//print implode(" _ ",$mesParams);
-		
-		
+
+
 		$requete = 'SELECT `PRENOM`,`NOM`,`DDN` FROM `patient` INNER JOIN ths_centre ON patient.IDCENTRE = ths_centre.IDCENTRE WHERE ths_centre.LIBELLECENTRE LIKE :ville';
 		$req = $bdd->prepare($requete);
 		$req->execute(array(':ville' => $_GET['choixville']));
 		$resultat = $req->fetch();
 		if($resultat){//verif si resultat
-			
+
     echo '<h3>Liste des patients</h3>
     <div class="table-responsive">
     <table class="table table-hover">
-    
+
     <thead>
     <tr>
       <td>Nom</td>
@@ -41,7 +41,7 @@
     </tr>
     </thead>
     ';
-    
+
     do {//iteration sur toutes les lignes
       //debut ligne tableau
       echo'<tr>';
@@ -50,9 +50,53 @@
       echo'<td>'.$resultat[2].'</td>
       <td>
         <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-          <button type="button" class="btn btn-secondary">Modifier</button>
-          <button type="button" class="btn btn-secondary">Supprimer</button>
+          <button type="button" data-toggle="modal" data-target="'.$resultat[0].$resultat[1].'modif" class="btn btn-secondary">Modifier</button>
+          <button type="button" data-toggle="modal" data-target="'.$resultat[0].$resultat[1].'supp" class="btn btn-secondary">Supprimer</button>
         </div>
+				<aside class="modal fade" id="'.$resultat[0].$resultat[1].'modif" tabindex="-1" role="dialog" aria-labelledby="'.$resultat[0].$resultat[1].'modifLabel" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="'.$resultat[0].$resultat[1].'modifLabel">Modification</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<form class="container modal-body" action="../../modifier/centre/modifCentre.php" method="get">
+								<div class="modal-body">
+									<input type="number" class="form-control" name="idcentre">
+									<p>coucou</p>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+									<button type="submit" class="btn btn-primary">Supprimer l\'enregistrement</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</aside>
+				<aside class="modal fade" id="'.$resultat[0].$resultat[1].'supp" tabindex="-1" role="dialog" aria-labelledby="'.$resultat[0].$resultat[1].'suppLabel" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="'.$resultat[0].$resultat[1].'suppLabel">Modification</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<form class="container modal-body" action="../../supprimer/centre/suppCentre.php" method="get">
+								<div class="modal-body">
+									<input type="hidden" class="form-control" name="idcentre">
+									<p>coucou</p>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+									<button type="submit" class="btn btn-primary">Supprimer l\'enregistrement</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</aside>
       </td>
       </tr>';
     } while ($resultat = $req->fetch());
@@ -66,6 +110,6 @@
    }
    $req->closeCursor() ;
   }
-		
-getEnd(3);	
+
+getEnd(3);
 		?>

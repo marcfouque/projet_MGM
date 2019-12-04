@@ -2,11 +2,11 @@
 session_start();
 require "../../../tools/functionsParams.php";
 
-if(isset($_SESSION['coco'])){
+if(isset($_SESSION['coco'])){//si connecté
   $bool=true;
   $mesParams = (count($_GET)==0?array(99,"0 parametre",null):verifParams("modifExamPat",$_GET));
   $mess ="";
-   if($mesParams[0]==1){
+   if($mesParams[0]==1){//si params bons
      require "../../../tools/connect.php";
 
         //construction requete
@@ -20,26 +20,23 @@ if(isset($_SESSION['coco'])){
      		try {
      		    $resultat=$req->execute($arrexec);
             $compt = $req->rowCount();
-     			 	//if($compt>0){//requete aboutie
+     			 	if($compt>0){//requete aboutie
      				     $bool=false;
-                 //header('Location: ' . $_SERVER['HTTP_REFERER']);
                  header('Location: ../../consulter/examen/formConsultExamen.php?numexam='.$mesParams[1]['numexam'].'&numpat='.$mesParams[1]['numpat'].'&datexam='.$mesParams[1]['datexam'].'&choixreq=1');
                  exit;
-     				//}
-            /*
+     				}
+
             else{
-                //$mess.="<p>".count($req->fetchAll())."</p>";
-                $mess = "<p>".$compt."</p>";
-                $mess.="<p>".$requete."</p>";
+                $mess .="<p>La requete n'a modifié aucune ligne, les valeurs passées existaient déjà ou au moins une valeur est erronée</p>";
             }
-            */
+
      		} catch (PDOException $e) {
      		   //une erreur s'est produite, $bool le signifiera
-           echo "<p>".$e.getError()."</p>";
+           $mess.= "<p>".$e.getError()."</p>";
      		}
      		$req->closeCursor() ;
    }
-   if($bool){
+   if($bool){//affiche messages si probleme
      require "../../../tools/functionsPrint.php";
      getStart(3);
      //if($mesParams[0]==1)echo'<p><b>'.$mesParams[1].'</b></p>';
@@ -49,7 +46,7 @@ if(isset($_SESSION['coco'])){
      getEnd(3);
    }
 
-}else{
+}else{//pas connecté
   require "../../../tools/functionsPrint.php";
   getStart(3);
   echo'<h2>403</h2>';
