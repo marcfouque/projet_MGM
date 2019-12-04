@@ -57,6 +57,7 @@ $mesParams = verifParams("consultTrait",$_GET);
       <div class="modal-body">
       <input type="hidden" class="form-control" value="§MOTCLEF.numttt" name="numttt">
       <input type="hidden" class="form-control" value="§MOTCLEF.numpat" name="numpat">
+      <input type="hidden" class="form-control" value="§MOTCLEF.datedeb" name="datedeb">
       <p>§MOTCLEFS</p>
       </div>
       <div class="modal-footer">
