@@ -74,6 +74,10 @@
 					"obligatoire"=>array(),
 					"facultatif"=>array("numpat","prenompat","nompat")
 				],
+		"modifPat"=>[
+					"obligatoire"=>array(),
+					"facultatif"=>array("numpat","prenompat","nompat","ddn","consang","nbame","pdsnaiss","taillenaiss","pcnaiss","sexe")
+				],	
 
 	];
 ?>

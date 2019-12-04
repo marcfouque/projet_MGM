@@ -104,6 +104,33 @@
 		],
 		"prenompat"=>[
 			"type"=>"string"
+		],
+		"ddn"=>[
+			"type"=>"date",
+		],
+		"sexe"=>[
+			"type"=>"string",
+			"valeurs"=>array('1','2'),
+		],
+		"consang"=>[
+			"type"=>"string",
+			"valeurs"=>array('oui','non'),
+		],
+		"pdsnaiss"=>[
+			"type"=>"entier",
+			"bornes"=>array(0,null)
+		],
+		"taillenaiss"=>[
+			"type"=>"entier",
+			"bornes"=>array(0,null)
+		],
+		"pcnaiss"=>[
+			"type"=>"entier",
+			"bornes"=>array(0,null)
+		],
+		"nbame"=>[
+			"type"=>"entier",
+			"bornes"=>array(0,null)
 		]
 
 	]
