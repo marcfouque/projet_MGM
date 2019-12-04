@@ -66,31 +66,31 @@
 			"bornes"=>array('1900-01-01',null),
 		],
 		"choixreq"=>[
-			"type"=>"booleen"
+			"type"=>"booleen",
 		],
 		"libtrait"=>[
-			"type"=>"string"
+			"type"=>"string",
 		],
 		"treatadd"=>[
-			"type"=>"string"
+			"type"=>"string",
 		],
 		"choixville"=>[
-			"type"=>"string"
+			"type"=>"string",
 		],
 		"idCentre"=>[
 			"type"=>"entier",
-			"bornes"=>array(0,null)
+			"bornes"=>array(0,null),
 		],
 		"libCentre"=>[
-			"type"=>"string"
+			"type"=>"string",
 		],
 		"choixid"=>[
 			"type"=>"entier",
-			"bornes"=>array(0,null)
+			"bornes"=>array(0,null),
 		],
 		"choixttt"=>[
 			"type"=>"entier",
-			"bornes"=>array(0,null)
+			"bornes"=>array(0,null),
 		],		
 		"datedeb"=>[
 			"type"=>"date",
@@ -100,9 +100,10 @@
 			"type"=>"date",
 		],
 		"nompat"=>[
-			"type"=>"string"
+			"type"=>"string",
 		],
 		"prenompat"=>[
+<<<<<<< HEAD
 			"type"=>"string"
 		],
 		"ddn"=>[
@@ -133,5 +134,13 @@
 			"bornes"=>array(0,null)
 		]
 
+=======
+			"type"=>"string",
+		],
+		"numttt"=>[
+			"type"=>"entier",
+			"bornes"=>array(0,null),
+		],
+>>>>>>> 9617d5d78fd74983993445e201c7c406e35b4664
 	]
 ?>

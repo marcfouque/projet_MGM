@@ -74,10 +74,17 @@
 					"obligatoire"=>array(),
 					"facultatif"=>array("numpat","prenompat","nompat")
 				],
+<<<<<<< HEAD
 		"modifPat"=>[
 					"obligatoire"=>array(),
 					"facultatif"=>array("numpat","prenompat","nompat","ddn","consang","nbame","pdsnaiss","taillenaiss","pcnaiss","sexe")
 				],	
+=======
+		"supTraitPat"=>[
+					"obligatoire"=>array("numpat","numttt","datedeb"),
+					"facultatif"=>array("datefin")
+				],
+>>>>>>> 9617d5d78fd74983993445e201c7c406e35b4664
 
 	];
 ?>

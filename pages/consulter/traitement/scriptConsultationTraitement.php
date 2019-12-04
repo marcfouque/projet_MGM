@@ -55,9 +55,9 @@ $mesParams = verifParams("consultTrait",$_GET);
       </div>
       </form>';
 
-      $formSuppLigne = '<form class="container modal-body" action="../../supprimer/examen/suppExamThs.php" method="get">
+      $formSuppLigne = '<form class="container modal-body" action="../../supprimer/traitement/supTraitPat.php" method="get">
       <div class="modal-body">
-      <input type="hidden" class="form-control" name="numexam">
+      <input type="hidden" class="form-control" name="numttt">
       <p>§MOTCLEFS</p>
       </div>
       <div class="modal-footer">
