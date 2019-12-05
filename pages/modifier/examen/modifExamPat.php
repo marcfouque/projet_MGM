@@ -39,7 +39,6 @@ if(isset($_SESSION['coco'])){//si connecté
    if($bool){//affiche messages si probleme
      require "../../../tools/functionsPrint.php";
      getStart(3);
-     //if($mesParams[0]==1)echo'<p><b>'.$mesParams[1].'</b></p>';
      echo'<p>'.$mess.'</p>';
      echo'<p><b>'.implode(" ",$mesParams[1]).'</b></p>';
      echo'<p class="display-4">La modification a échoué, <a href="../../consulter/examen/formConsultExamen.php">retour</a></p>';

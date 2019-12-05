@@ -11,7 +11,7 @@ Projet dans le cadre de l'UE INF204,  consistant en une interface web permettant
 
 ### Prérequis
  Serveur Apache >2.2<br/>
- PHP >7<br/>
+ PHP >5.6 (>= 7 recommandé)<br/>
  MySQL >8<br/>
  Navigateur Internet lisant le Javascript<br/>
  💻

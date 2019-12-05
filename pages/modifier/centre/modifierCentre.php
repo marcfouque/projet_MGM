@@ -2,11 +2,11 @@
 session_start();
 require "../../../tools/functionsParams.php";
 
-if(isset($_SESSION['coco'])){
+if(isset($_SESSION['coco'])){//verification user connecté
   $bool=true;
   $mess="";
   $mesParams = (count($_GET)==0?array(99,"0 parametre",null):verifParams("modifCentre",$_GET));
-   if($mesParams[0]==1){
+   if($mesParams[0]==1){//si les parametres sont bons
      require "../../../tools/connect.php";
 
         //construction requete
@@ -16,7 +16,7 @@ if(isset($_SESSION['coco'])){
      		try {
             $resultat=$req->execute(array(":numpat"=>$mesParams[1]['numpat'], ":idCentre" => $mesParams[1]['idCentre'] ));
      				$bool=false;
-            //adresse retour à changer
+            //redirection automatique
             header('Location: ../../consulter/centre/formConsultCentre.php');
             exit;
      		} catch (PDOException $e) {
@@ -26,7 +26,7 @@ if(isset($_SESSION['coco'])){
      		}
      		$req->closeCursor() ;
    }
-   if($bool){
+   if($bool){//si erreur
      require "../../../tools/functionsPrint.php";
     getStart(3);
     echo $bool;
@@ -37,7 +37,7 @@ if(isset($_SESSION['coco'])){
      getEnd(3);
    }
 }
-else{
+else{//si utilisateur non connecté
   require "../../../tools/functionsPrint.php";
   getStart(3);
   echo'<h2>403</h2>';
