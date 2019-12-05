@@ -1,8 +1,6 @@
 <?php session_start(); 
 require "../../../tools/functionsPrint.php";
 getStart(3);
-require "../../../tools/functionsParams.php";
-require "../../../tools/connect.php";
 
 		print 
 		'

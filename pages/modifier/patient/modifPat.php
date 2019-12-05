@@ -2,19 +2,19 @@
 session_start();
 require "../../../tools/functionsParams.php";
      require "../../../tools/functionsPrint.php";
-
+     require "../../../tools/connect.php";
 getStart(3);
+
+//test de la connexion
 if(isset($_SESSION['coco'])){
   $bool=4;
   $mess="";
   $mesParams = (count($_GET)==0?array(99,"0 parametre",null):verifParams("modifPat",$_GET));
-  //echo $mesParams[0];
 
+//test des parametres
    if($mesParams[0]==1){
-     require "../../../tools/connect.php";
-		$t=isset($_GET['nompat']);
-		echo $t;
-        //construction requete
+
+        //requete
         $requete = "UPDATE patient SET prenom = :nvprenom, nom = :nvnom, ddn = :nvddn, sexe = :nvsexe, consangpar = :nvcons, samen = :nvsamen, pdsnais = :nvpds, taillenais = :nvtaille, pcnais = :nvpc where numpat= :idpat";
 		$req = $bdd->prepare($requete);
 

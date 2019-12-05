@@ -16,25 +16,24 @@ else if($mesParams[0]==2){//parametre invalide
 }
 else if($mesParams[0]==1){//parametres bons
 	require "../../../tools/connect.php";
-	//$mesParams = $mesParams[1];
-	//print implode(" _ ",$mesParams);
-
+	
+	//identifiant renseigné	
 	if($_GET['numpat']!=''){
 		$requete = 'SELECT * FROM `patient` WHERE patient.numpat LIKE :idpat';
 		$req = $bdd->prepare($requete);
 		$req->execute(array(':idpat' => $_GET['numpat']));	
+	//prenom ET nom 	
 	}elseif($_GET['nompat']!='' AND $_GET['prenompat']!=''){
 		$requete = 'SELECT * FROM `patient` WHERE patient.NOM LIKE :nomp and patient.PRENOM LIKE :prenomp';
 		$req = $bdd->prepare($requete);
 		$req->execute(array(':nomp' => $_GET['nompat'],':prenomp' => $_GET['prenompat']));	
+	//prenom OU nom
 	}else{
 		$requete = 'SELECT * FROM `patient` WHERE patient.NOM LIKE :nomp or patient.PRENOM LIKE :prenomp';
 		$req = $bdd->prepare($requete);
 		$req->execute(array(':nomp' => $_GET['nompat'],':prenomp' => $_GET['prenompat']));	
 	}
 
-	/*$req = $bdd->prepare($requete);
-		$req->execute(array(':idpat' => $_GET['numpat'],':nomp' => $_GET['nompat'],':prenomp' => $_GET['prenompat']));	*/
 	$resultat = $req->fetch();
 
 	if($resultat){//verif si resultat
@@ -82,28 +81,28 @@ else if($mesParams[0]==1){//parametres bons
 			<button type="button" data-toggle="modal" data-target="#modif" class="btn btn-secondary">Modifier</button>
 			<button type="button" data-toggle="modal" data-target="#supp" class="btn btn-secondary">Supprimer</button>';
 
-			//ouverture boite de dialogue pour supprimer;
+			//ouverture fenetre modale pour supprimer;
 			echo '<div class="modal" id="supp">
-			<div class="modal-dialog">
-			<div class="modal-content">
-			<div class="modal-header">
-			<h4 class="modal-title">Attention</h4>
-			</div>
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+						<h4 class="modal-title">Attention</h4>
+						</div>
 
-			<div class="modal-body">
-			Etes-vous sûr(e) de vouloir supprimer cette ligne?      </div>
-			<form class="container modal-body" action="../../supprimer/patient/suppTraitPat.php" method="get">
-			<div class="modal-body">
-			<input type="hidden" value="'.$resultat[0].'" class="form-control" name="numpat">
-			</div>
-			<div class="modal-footer">
-			<button type="button" id="4" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-			<button type="submit" class="btn btn-primary">Supprimer l\'enregistrement</button>
-			</div>
-			</form>
-			</div>
-			</div>
-			</div>
+						<div class="modal-body">
+							Etes-vous sûr(e) de vouloir supprimer cette ligne?      </div>
+							<form class="container modal-body" action="../../supprimer/patient/suppPat.php" method="get">
+								<div class="modal-body">
+									<input type="hidden" value="'.$resultat[0].'" class="form-control" name="numpat">
+								</div>
+								<div class="modal-footer">
+									<button type="button" id="4" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+									<button type="submit" class="btn btn-primary">Supprimer l\'enregistrement</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
 			</div>';
 			//ouverture boite de dialogue pour modifier;
 			echo'<div class="modal" id="modif">
