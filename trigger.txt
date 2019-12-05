@@ -1,0 +1,33 @@
+
+DELIMITER |
+CREATE TRIGGER after_delete_patient AFTER DELETE
+ON patient FOR EACH ROW
+BEGIN
+    INSERT INTO patientsupp
+        (numpat,
+         prenom,
+        nom,
+        ddn,
+        sexe,
+        consangpar,
+        samen,
+        pdsnais,
+        taillenais,
+        pcnais,
+        idcentre,
+        ahaievans)
+    VALUES
+		(OLD.numpat,
+         OLD.prenom,
+         OLD.nom,
+         OLD.ddn,
+         OLD.sexe,
+         OLD.consangpar,
+         OLD.samen,
+         OLD.pdsnais,
+         OLD.taillenais,
+         OLD.pcnais,
+         OLD.idcentre,
+         OLD.ahaievans);
+         END|
+		 DELIMITER ;
