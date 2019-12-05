@@ -15,6 +15,7 @@ else if($mesParams[0]==2){//parametre invalide
 else if($mesParams[0]==1){//parametres bons
 	require "../../../tools/connect.php";
 
+if(isset($_SESSION['coco'])){
 	// On ajoute le traitement dans la table relation patient traitement
 	if($_GET['datefin']==''){
 		$_GET['datefin'] = null;
@@ -58,7 +59,14 @@ else if($mesParams[0]==1){//parametres bons
 			</div><br/>
 			</form>';
 	}
-
+}else{
+	'Vous devez être connecté pour ajouter !
+			<form action="formAjoutTraitementPatient.php" method="GET"
+			<div class="input-group">
+			<input class="btn btn-primary" type="submit" value="Ajouter un autre traitement">
+			</div><br/>
+			</form>';
+}
 //fermeture elsif du test des parametres de base
 }
 	getEnd(3);

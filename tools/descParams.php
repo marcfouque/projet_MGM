@@ -118,6 +118,17 @@
 		"nbame"=>[
 			"type"=>"entier",
 			"bornes"=>array(0,null)
+		],
+		"valmin"=>[
+			"type"=>"entier",
+			"bornes"=>array(0,null)
+		],
+		"valmax"=>[
+			"type"=>"entier",
+			"bornes"=>array(0,null)
+		],
+		"libexam"=>[
+			"type"=>"string",
 		]
 	]
 ?>

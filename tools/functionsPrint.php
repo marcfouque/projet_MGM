@@ -72,7 +72,7 @@
 						</a>
 						<div class="dropdown-menu" aria-labelledby="dropAjou">
 						  <a class="dropdown-item" href="pages/ajouter/traitementThesaurus/formAjoutTraitementThesaurus.php" >Nouveau Traitement</a>
-					    <a class="dropdown-item" href="#"  >Nouvel Examen</a>
+					    <a class="dropdown-item" href=""'.$prefix.'pages/ajouter/examenThesaurus/formAjoutExamenThesaurus.php"  >Nouvel Examen</a>
 							<a class="dropdown-item" href="'.$prefix.'pages/ajouter/traitementPatients/formAjoutTraitementPatient.php"  >Traitement à un Patient</a>
 							<a class="dropdown-item" href="'.$prefix.'pages/ajouter/examens/formAjoutExam.php"  >Examen à un Patient</a>
 						</div>
