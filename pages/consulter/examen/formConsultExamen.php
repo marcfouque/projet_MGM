@@ -272,7 +272,7 @@
 					<input type="number" class="form-control" name="resexam" id="resexam" placeholder="saisissez la valeur des résultats du patient" value="'.(isset($_GET["resexam"])?$_GET["resexam"]:"").'" />
 			  </div>
 			<div class="form-group form-radio">
-	      Sélectionnez le type de resultat voulue :
+	      Sélectionnez le type de resultat désiré :
 	      <div class="form-check">
 	        <input class="form-check-input" type="radio" value="0" name="choixreq" id="choixreqEx" />
 	        <label class="form-check-label" for="choixreqEx">
