@@ -18,7 +18,7 @@
 		';
 	}
 	echo'<h1>Ajout examen</h1>';
-	//si requete vierge
+	//si requete vierge + verification des parametres
 	$mesParams = (count($_GET)==0?array(99,"0 parametre"):verifParams("ajoutExamPat",$_GET));
 	if($mesParams[0]==1 and isset($_SESSION['coco']) ){//si les parametres sont valides
 
@@ -33,16 +33,16 @@
 
 		try {
 		    $resultat=$req3->execute($arrexec);
-			 	if($req3->rowCount()==0){
+			 	if($req3->rowCount()==0){//si la requete n'a eu d'effet sur aucune ligne
 					messageInsert("Une erreur s'est produite, veuillez verifier que le resultat du patient se trouve entre les bornes de l'examen selectionné");
 				}
 				else messageInsert("Examen :".$mesParams[1]['numexam'].", Patient :".$mesParams[1]['numpat'].", Date :".$mesParams[1]['datexam'].(isset($mesParams[1]['resexam'])?", Resultat:".$mesParams[1]['resexam']:"")."<br/>Examen ajouté au patient",1);
 		} catch (PDOException $e) {
 			$temp=$req3->errorInfo();
-		    if ($e->getCode() == 1062 or temp[1]==1062) {
+		    if ($e->getCode() == 1062 or temp[1]==1062) {//gestion erreur clef primaire déjà existante
 		         messageInsert("Le patient ".$mesParams[1]['numpat']." a déjà effectué l' examen ".$mesParams[1]['numexam']." à la date ".$mesParams[1]['datexam']."<br/> <a href='../../consulter/examen/formConsultExamen.php?numexam=".$mesParams[1]['numexam']."&numpat=".$mesParams[1]['numpat']."&datexam=".$mesParams[1]['datexam']."&choixreq=1'>Modifier l'examen</a>");
 		    }
-				else if ($e->getCode() == 1452 or temp[1]==1452) {
+				else if ($e->getCode() == 1452 or temp[1]==1452) {//gestion erreur clef etrangère erronée
  		        messageInsert("une des valeurs transmises ne correspond pas à un patient ou un examen présent dans la base.<br/><a href='#'>Ajouter patient</a><br/><a href='#'>Ajouter Examen</a>");
  		    }
 				else messageInsert("Une erreur s'est produite<br><b>".implode(' __ ',$req3->errorInfo())."</b>");
@@ -53,13 +53,14 @@
 		//print ($req3->errorInfo())[1];
 		//print ($req3->errorInfo())[1]==1062;
 	}
+	//affichage du formulaire
 		print'
 			<h2>Formulaire d\'ajout d\'examen à un patient</h2>
 			<form class="container" action="formAjoutExam.php" method="get">
 			  <div class="form-group">
 					<label for="numexam" >Numéro de l\'examen</label>
 					<select required class="form-control" name="numexam" id="numexam"  value="'.(isset($_GET["numexam"])?$_GET["numexam"]:"").'" >';
-					//recuperation de tous les types d'examen
+		//recuperation de tous les types d'examen
 		$req = $bdd->prepare("Select * from ths_examen");
 		$req->execute();
 		$resultat = $req->fetch();
@@ -80,7 +81,7 @@
 					<label for="numpat" >Numéro du patient</label>
 					<select required class="form-control" name="numpat" id="numpat" value="'.(isset($_GET["numpat"])?$_GET["numpat"]:"").'" >
 				';
-				//recuperationde tous les patients
+		//recuperationde tous les patients
 		$req2 = $bdd->prepare("Select numpat,prenom,nom from patient;select * from ths_examen;");
 		$req2->execute();
 		$resultat2 = $req2->fetch();
@@ -100,11 +101,11 @@
 				</div>
 			  <div class="form-group">
 					<label for="datexam" >Date de l\'examen</label>
-					<input required type="date" class="form-control" name="datexam" id="datexam" placeholder="saisissez la date de l\'examen" value="'.(isset($_GET["datexam"])?$_GET["datexam"]:"").'" >
+					<input required type="date" class="form-control" name="datexam" id="datexam" placeholder="saisissez la date de l\'examen" value="'.(isset($_GET["datexam"])?$_GET["datexam"]:"").'" />
 			  </div>
 				<div class="form-group">
 					<label for="resexam" >Résultat de l\'examen</label>
-					<input type="number" step="0.01" min=0 class="form-control" name="resexam" id="resexam" placeholder="saisissez le resutlat de l\'examen" value="'.(isset($_GET["resexam"])?$_GET["resexam"]:"").'" >
+					<input type="number" step="0.01" min=0 class="form-control" name="resexam" id="resexam" placeholder="saisissez le resutlat de l\'examen" value="'.(isset($_GET["resexam"])?$_GET["resexam"]:"").'" />
 			  </div>
 			  <button type="submit" class="btn btn-primary">Ajouter l\'examen</button>
 			</form>
@@ -132,7 +133,7 @@
 				</aside>
 			';
 		}
-		else if(!isset($_SESSION['coco'])){//parametre invalide
+		else if(!isset($_SESSION['coco'])){//utilisateur non connecté
 			print '
 				<aside class="alert alert-warning alertParam" role="alert">
 					<p class="display-4">Vous devez être connecté-e pour ajouter un examen

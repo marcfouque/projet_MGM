@@ -2,15 +2,14 @@
 session_start();
 require "../../../tools/functionsParams.php";
 
-if(isset($_SESSION['coco'])){
+if(isset($_SESSION['coco'])){//si connecté
   $bool=true;
   $mess="";
   $mesParams = (count($_GET)==0?array(99,"0 parametre",null):verifParams("suppExamThs",$_GET));
-   if($mesParams[0]==1){
+   if($mesParams[0]==1){//si params bon
      require "../../../tools/connect.php";
 
         //construction requete
-        //$requete = "update ths_examen set numexam = :nume, libellexam = :lab, valmin = :minexam, valmax = :maxexam where numexam = :nume;";
         $requete = "delete from ths_examen where numexam = :nume; ";
 
      		$req = $bdd->prepare($requete);
@@ -27,18 +26,17 @@ if(isset($_SESSION['coco'])){
      		}
      		$req->closeCursor() ;
    }
-   if($bool){
+   if($bool){//print si erreurs
      require "../../../tools/functionsPrint.php";
     getStart(3);
     echo $bool;
     echo $mess;
-    //if($mesParams[0]==1)echo'<p><b>'.$mesParams[1].'</b></p>';
     echo'<p><b>'.implode(" ",$mesParams[1]).'</b></p>';
      echo'<p class="display-4">La suppression a échoué, <a href="../../consulter/examen/formConsultExamen.php">retour</a></p>';
      getEnd(3);
    }
 
-}else{
+}else{//si pas connecté
   require "../../../tools/functionsPrint.php";
   getStart(3);
   echo'<h2>403</h2>';

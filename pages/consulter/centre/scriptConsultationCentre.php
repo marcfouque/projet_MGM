@@ -36,7 +36,8 @@
 
 		echo '<h1>Vous avez recherché : '.$_GET['choixville'].'</h1>';
 
-	//affichage des fenêtres modals "Modifier" et "Supprimer"
+	//affichage des fenêtres modals "Modifier" et "Supprimer" (certaines valeurs non affichés dans la fenêtre modale doivent tout de même mentionnés en "hidden" pour être réutilisés par modifier ou supprimer)
+	// valeurs récupérés grâce à mot clef
       $formModifLigne= '<form class="container modal-body" action="../../modifier/centre/modifierCentre.php" method="get">
       <div class="modal-body">
       <input type="hidden" name="numpat" value="§MOTCLEF.numpat"/>

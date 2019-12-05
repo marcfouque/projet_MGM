@@ -157,6 +157,8 @@
 		//$colonnesVisible un array des noms de colonne que l'on veut voir apparaitre (en minuscules)
 
 
+		//pour afficher des valeurs de la ligne à laquelle les formulaires se referent, utiliser le mot-clef §MOTCLEF.nomdelacolonneenminuscule
+		//le mot clef §MOTCLEFS (avec un s) affichera un recapitulatif de la ligne.
 		function remplaceMotClef($form, $colonne,$resultat){
 			//remplace tous les mots-clefs dinserer dans les formauliares par les valeurs correspondantes
 			$formulaire = $form;	//clone de $form
@@ -266,7 +268,7 @@
 				';
 
 				echo'</tr>';
-				//itération
+				//itération resultat
 			} while ($resultat = $req->fetch());
 
 			print'
