@@ -71,8 +71,8 @@
 						  Ajouter
 						</a>
 						<div class="dropdown-menu" aria-labelledby="dropAjou">
-						  <a class="dropdown-item" href="pages/ajouter/traitementThesaurus/formAjoutTraitementThesaurus.php" >Nouveau Traitement</a>
-					    <a class="dropdown-item" href=""'.$prefix.'pages/ajouter/examenThesaurus/formAjoutExamenThesaurus.php"  >Nouvel Examen</a>
+						  <a class="dropdown-item" href="'.$prefix.'pages/ajouter/traitementThesaurus/formAjoutTraitementThesaurus.php" >Nouveau Traitement</a>
+					    <a class="dropdown-item" href="'.$prefix.'pages/ajouter/examenThesaurus/formAjoutExamenThesaurus.php"  >Nouvel Examen</a>
 							<a class="dropdown-item" href="'.$prefix.'pages/ajouter/traitementPatients/formAjoutTraitementPatient.php"  >Traitement à un Patient</a>
 							<a class="dropdown-item" href="'.$prefix.'pages/ajouter/examens/formAjoutExam.php"  >Examen à un Patient</a>
 						</div>
@@ -84,8 +84,8 @@
 						<div class="dropdown-menu" aria-labelledby="dropConsul">
 						  <a class="dropdown-item" href="'.$prefix.'pages/consulter/patient/formConsultPatient.php" >Patient</a>
 					    <a class="dropdown-item" href="'.$prefix.'pages/consulter/examen/formConsultExamen.php"  >Examen</a>
-					    <a class="dropdown-item" href="pages/consulter/centre/formConsultCentre.php"  >Centre</a>
-						 	<a class="dropdown-item" href="pages/consulter/traitement/formConsultTraitement.php"  >Traitement</a>
+					    <a class="dropdown-item" href="'.$prefix.'pages/consulter/centre/formConsultCentre.php"  >Centre</a>
+						 	<a class="dropdown-item" href="'.$prefix.'pages/consulter/traitement/formConsultTraitement.php"  >Traitement</a>
 						</div>
 					  </li>
 					  <li class="nav-item dropdown">
@@ -157,8 +157,6 @@
 		//$colonnesVisible un array des noms de colonne que l'on veut voir apparaitre (en minuscules)
 
 
-		//pour afficher des valeurs de la ligne à laquelle les formulaires se referent, utiliser le mot-clef §MOTCLEF.nomdelacolonneenminuscule
-		//le mot clef §MOTCLEFS (avec un s) affichera un recapitulatif de la ligne.
 		function remplaceMotClef($form, $colonne,$resultat){
 			//remplace tous les mots-clefs dinserer dans les formauliares par les valeurs correspondantes
 			$formulaire = $form;	//clone de $form
@@ -268,7 +266,7 @@
 				';
 
 				echo'</tr>';
-				//itération resultat
+				//itération
 			} while ($resultat = $req->fetch());
 
 			print'
