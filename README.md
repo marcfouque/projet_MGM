@@ -36,8 +36,8 @@ Passage via une interface d'administration de MySQL possible
 
 <p><i>./index.php</i> , vous affiche la page d'accueil, de là possiblité d'accéder à l'ajout d'entités dans la base de données via l'option Ajouter ou d'en rechercher via l'option Consulter
 La recherche des entités vous permettra de modifier ou de supprimer les entités trouvées.
-L'ajout, la Modification et la Suppression d'entités nécessite d'etre connecté.</p>
-<p>Un utilisateur peut etre ajouter grâce à la commande</p>
+</p><p>L'Ajout, la Modification et la Suppression d'entités nécessite d'etre connecté.</p>
+<p>Un utilisateur peut etre ajouté grâce à la commande</p>
 
 ```sql
 mysql INSERT INTO utilisateur VALUES ('nomdelutilisateur',cryptMdp('motdepasse'))
