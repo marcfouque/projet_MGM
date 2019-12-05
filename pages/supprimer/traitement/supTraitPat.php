@@ -15,8 +15,7 @@ $mesParams = verifParams("supTraitPat",$_GET);
 			//$mesParams = $mesParams[1];
 			//print implode(" _ ",$mesParams);
 			require "../../../tools/connect.php";
-
-
+$mesParams[1]["numpat"];
 			$requete = "delete from rel_patient_traitement where numpat = :nump AND numttt = :numt AND datedeb = :datedeb";
 			$req = $bdd->prepare($requete);
 			

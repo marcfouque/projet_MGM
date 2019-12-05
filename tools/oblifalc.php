@@ -48,11 +48,11 @@
 					"facultatif"=>array()
 				],
 		"modifCentre"=>[
-					"obligatoire"=>array("nompat","prenompat","ddn","idCentre"),
+					"obligatoire"=>array("numpat","idCentre"),
 					"facultatif"=>array()
 				],
 		"suppCentre"=>[
-					"obligatoire"=>array("nompat","prenompat","ddn"),
+					"obligatoire"=>array("numpat"),
 					"facultatif"=>array()
 				],
 		"modifTraitPat"=>[
@@ -68,8 +68,8 @@
 					"facultatif"=>array("datefin")
 				],
 		"suppPat"=>[
-					"obligatoire"=>array(),
-					"facultatif"=>array("numpat","prenompat","nompat")
+					"obligatoire"=>array("numpat"),
+					"facultatif"=>array()
 				],
 		"supTraitPat"=>[
 					"obligatoire"=>array("numpat","numttt","datedeb"),

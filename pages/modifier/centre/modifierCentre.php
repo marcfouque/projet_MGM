@@ -10,11 +10,11 @@ if(isset($_SESSION['coco'])){
      require "../../../tools/connect.php";
 
         //construction requete
-        $requete = "update patient set idCentre = :idCentre where nom=:nompat and prenom=:prenompat and ddn=:ddn;";
+        $requete = "update patient set idCentre = :idCentre where numpat=:numpat;";
 
      		$req = $bdd->prepare($requete);
      		try {
-            $resultat=$req->execute(array(":nompat"=>$mesParams[1]['nompat'],":prenompat"=>$mesParams[1]['prenompat'],":ddn"=>$mesParams[1]['ddn'],":idCentre"=>$mesParams[1]['idCentre']));
+            $resultat=$req->execute(array(":numpat"=>$mesParams[1]['numpat'], ":idCentre" => $mesParams[1]['idCentre'] ));
      				$bool=false;
             //adresse retour à changer
             header('Location: ../../consulter/centre/formConsultCentre.php');

@@ -11,12 +11,12 @@ if(isset($_SESSION['coco'])){
 
         //construction requete
         //$requete = "update ths_examen set numexam = :nume, libellexam = :lab, valmin = :minexam, valmax = :maxexam where numexam = :nume;";
-        $requete = "UPDATE patient SET idcentre = null WHERE NOM=:nompat and PRENOM=:prenompat and ddn=:ddnpat;";
+        $requete = "UPDATE patient SET idcentre = null WHERE numpat=:numpat;";
 
      		$req = $bdd->prepare($requete);
 
      		try {
-     		    $resultat=$req->execute(array(":nompat"=>$mesParams[1]['nompat'],":prenompat"=>$mesParams[1]['prenompat'],":ddnpat"=>$mesParams[1]['ddn']));
+     		    $resultat=$req->execute(array(":numpat"=>$mesParams[1]['numpat']));
      				$bool=false;
             //addresse à changer
             header('Location: ../../consulter/centre/formConsultCentre.php');

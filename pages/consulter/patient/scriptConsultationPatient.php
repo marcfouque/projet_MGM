@@ -119,47 +119,49 @@ else if($mesParams[0]==1){//parametres bons
 								<div class="form-group">
 									<div>
 										<label for="prenompat">Prénom du patient: </label>
-											<input class="form-control" id="prenompat" placeholder="Prenom du patient" name="prenompat" aria-describedby="id">
+											<input class="form-control" id="prenompat" placeholder="Prenom du patient" name="prenompat" value="'.$resultat[1].'">
 									</div>
 									<div>
 										<label for="nompat">Nom du patient: </label>
-											<input class="form-control" id="nompat" placeholder="Nom du patient" name="nompat" aria-describedby="id">
+											<input class="form-control" id="nompat" placeholder="Nom du patient" name="nompat" value="'.$resultat[2].'">
 									</div>
 									<div>
 										<label for="ddn">Date de naissance du patient: </label>
-											<input type=date class="form-control" id="ddn" name="ddn" aria-describedby="id">
+											<input type=date class="form-control" id="ddn" name="ddn" value="'.$resultat[3].'">
 									</div>
 									<div>
-										<label for="sexe">Sexe du patient: </label>
-											<select class="form-control" name="sexe">
-											<option value="" ></option>
-												<option value=1 >Homme</option>
-												<option value=2 >Femme</option>
-											</select>
+										<label  for="sexe">Sexe: </label>
+											<select class="form-control" name="sexe" value="'.$resultat[4].'">
+											<option selected value="'.$resultat[4].'" >'.$resultat[4].'</option>';
+											if ($resultat[4]==1){
+											echo'<option value="2" >2</option>';}
+											else{echo'<option value="1" >1</option>';}
+											echo'</select>
 									</div>
 									<div>
 										<label  for="consang">Consanguinité: </label>
 											<select class="form-control" name="consang">
-											<option value="" ></option>
-												<option value="oui" >Oui</option>
-												<option value="non" >Non</option>
-											</select>			
+											<option selected value="'.$resultat[5].'" >'.$resultat[5].'</option>';
+											if ($resultat[5]=='oui'){
+											echo'<option value="non" >non</option>';}
+											else{echo'<option value="oui" >oui</option>';}
+											echo'</select>			
 									</div>
 									<div>
 										<label for="nbame">Nb semaines d\'aménorrhée : </label>
-											<input type= number min=23 max=43 class="form-control" id="nbame" name="nbame" aria-describedby="id">
+											<input type= number min=23 max=43 class="form-control" id="nbame" name="nbame" value="'.$resultat[6].'">
 									</div>
 									<div>
 										<label for="pdsnaiss">Poids à la naissance: </label>
-											<input class="form-control" type=number id="pdsnaiss" name="pdsnaiss" aria-describedby="id">
+											<input class="form-control" type=number id="pdsnaiss" name="pdsnaiss" value="'.$resultat[7].'">
 									</div>
 									<div>
 										<label for="taillenaiss">Taille à la naissance: </label>
-											<input class="form-control" type= number id="taillenaiss" name="taillenaiss" aria-describedby="id">
+											<input class="form-control" type= number id="taillenaiss" name="taillenaiss" value="'.$resultat[8].'">
 									</div>
 									<div>
 										<label for="pcnaiss">Périmètre cranien: </label>
-										<input class="form-control" type=number id="pcnaiss" name="pcnaiss" aria-describedby="id">
+										<input class="form-control" type=number id="pcnaiss" name="pcnaiss" value="'.$resultat[9].'">
 									</div>
 									<div class="modal-footer">
 										<button type="submit" class="btn btn-primary">Modifier l\'enregistrement</button>

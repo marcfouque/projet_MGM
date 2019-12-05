@@ -280,7 +280,7 @@
 		else{//si pas de résultat
 			echo "<b>Zéro resultat pour cette requète</b><br/>";
 			//echo "<b>Message de mySQL: </b>".implode("\n",$req->errorInfo());
-			echo "<a href='formConsultExamen_bis.php'><p> Retour au formulaire</p></a>";
+			//echo "<a href='formConsultExamen_bis.php'><p> Retour au formulaire</p></a>";
 		}
 		$req->closeCursor() ;
 	}
