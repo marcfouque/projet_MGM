@@ -5,23 +5,18 @@ getStart(3);
 require "../../../tools/functionsParams.php";
 
 $mesParams = verifParams("supTraitPat",$_GET);
-		if($mesParams[0]==0){//parametre manquant
-			echo $mesParams[1];
-		}
-		else if($mesParams[0]==2){//parametre invalide
-			echo $mesParams[1];
-		}
-		else if($mesParams[0]==1 and isset($_SESSION['coco'])){//parametres bons
-			//$mesParams = $mesParams[1];
-			//print implode(" _ ",$mesParams);
+		if($mesParams[0]==1 and isset($_SESSION['coco'])){//parametres bons et connection ok
+			
 			require "../../../tools/connect.php";
-$mesParams[1]["numpat"];
-			$requete = "delete from rel_patient_traitement where numpat = :nump AND numttt = :numt AND datedeb = :datedeb";
-			$req = $bdd->prepare($requete);
+
+			$requete = "delete from rel_patient_traitement where numpat = :nump AND numttt = :numt AND datedeb = :datedeb"; // requête de suppression
+			$req = $bdd->prepare($requete); // preparation de la requete
 			
 	
-			$req->execute(array(':nump' => $_GET['numpat'], ':numt' => $_GET['numttt'], ':datedeb' => $_GET['datedeb']));
-			if($req->rowCount()==0){
+			$req->execute(array(':nump' => $_GET['numpat'], ':numt' => $_GET['numttt'], ':datedeb' => $_GET['datedeb'])); // execution de la requete
+			if($req->rowCount()==0){ // vérification nombre de lignes supprimés
+				// Si = 0, message de non suppression
+				// Si # de 0, suppression effectuée
 				print'
 				<article class="alert alert-danger" role="alert">
 				<p>La suppression a échouée.
@@ -29,29 +24,32 @@ $mesParams[1]["numpat"];
 				<span aria-hidden="true">&times;</span>
 				</button>
 				</p>
+				<hr>
+				<a href=../../consulter/traitement/scriptConsultationTraitement.php?libtrait='.$_GET['libtrait'].'>Retour aux résultats</a>
 				</article>';
-				echo'<p><a href=../../consulter/traitement/scriptConsultationTraitement.php?libtrait='.$_GET['libtrait'].'>Retour aux résultats</a></p>';
-			} else {
+			} else { 
 			print'
-				<aside class="alert alert-success alertParam" role="alert">
-				<p>La suppression a été effectué.
+				<aside class="alert alert-success" role="alert">
+				<p>La suppression a été effectué 
 				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 				<span aria-hidden="true">&times;</span>
 				</button>
-				</p>
+				</p>				
 				</aside>
 				';
 
 			}
 
 			$req->closeCursor() ;
-		} else {
+		} else { // connexion non approuvée
 			print'<article class="alert alert-warning" role="alert">
 			<p>Vous n\'êtes pas connectés
 			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 			<span aria-hidden="true">&times;</span>
 			</button>
 			</p>
+			<hr>
+			<a href=../../consulter/traitement/scriptConsultationTraitement.php?libtrait='.$_GET['libtrait'].'>Retour aux résultats</a>
 			</article>';
 		}
 		

@@ -8,12 +8,24 @@ getStart(3);
 
 $mesParams = verifParams("consultTrait",$_GET);
     if($mesParams[0]==0){//parametre manquant
-      print '
-     <p class="display-4"> Parametre manquant <a href="#'.$mesParams[2].'"> Voir le paramètre manquant</a></p>';
+      print '<aside class="alert alert-warning " role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true" class="display-4">&times;</span>
+            </button>
+          <p> Oups... le paramètre est manquant</p>
+          <a href = "../../ajouter/traitementThesaurus/formAjoutTraitementThesaurus.php">Retour au formulaire</a>
+        </aside>'
+        ;
     }
     else if($mesParams[0]==2){//parametre invalide
-      print ' <p> Le paramètre est invalide </p>';
-
+      print '<aside class="alert alert-warning " role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true" class="display-4">&times;</span>
+            </button>
+          <p> Oups... le paramètre est invalide</p>
+          <a href = "../../ajouter/traitementThesaurus/formAjoutTraitementThesaurus.php">Retour au formulaire</a>
+        </aside>'
+      ;
     }
     else if($mesParams[0]==1){//parametres bons
       require "../../../tools/connect.php"; // connexion à la base de données
@@ -21,7 +33,9 @@ $mesParams = verifParams("consultTrait",$_GET);
       $requete = "SELECT P.NUMPAT, NOM, PRENOM, R.NUMTTT, LIBELLETTT, DATEDEB, DATEFIN FROM patient P INNER JOIN (rel_patient_traitement R INNER JOIN ths_traitement T on R.NUMTTT = T.NUMTTT) ON P.NUMPAT = R.NUMPAT WHERE LIBELLETTT like :nom_traitement";
 
 
-      echo '<h1>Vous avez recherché : '.$_GET['libtrait'].'</h1>';
+      echo '<h1>Vous avez recherché : '.$_GET['libtrait'].'</h1>'; 
+      // apparition de la fenetre modale 
+      // action modifier : valeurs récupérés grâce à mot clef
       $formModifLigne= '<form class="container modal-body" action="../../modifier/traitement/modifTraitPat.php" method="get">
       <div class="modal-body">
       <input type="hidden" name="numpat" value="§MOTCLEF.numpat"/>
@@ -53,11 +67,13 @@ $mesParams = verifParams("consultTrait",$_GET);
       </div>
       </form>';
 
+      // action supprimer : valeurs récupérés grâce à mot clef (certaines valeurs non affichés dans la fenêtre modale doivent tout de même mentionnés en "hidden" pour être réutilisés par modifier ou supprimer)
       $formSuppLigne = '<form class="container modal-body" action="../../supprimer/traitement/supTraitPat.php" method="get">
       <div class="modal-body">
       <input type="hidden" class="form-control" value="§MOTCLEF.numttt" name="numttt">
       <input type="hidden" class="form-control" value="§MOTCLEF.numpat" name="numpat">
       <input type="hidden" class="form-control" value="§MOTCLEF.datedeb" name="datedeb">
+      <input type="hidden" class="form-control" value="§MOTCLEF.libellettt" name="libtrait"  />
       <p>§MOTCLEFS</p>
       </div>
       <div class="modal-footer">
