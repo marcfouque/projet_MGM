@@ -12,6 +12,7 @@ print '<span class="border">
 		<button type="submit" class="btn btn-primary">Ajouter</button>
 		</form>
 		</span>';
-		
+		// utilisation de la méthode GET : affichage du paramètre dans l'URI (permet d'observer le fonctionnement ou non du script)
+		// envoi du formulaire et du paramètre au script
 getEnd(3);
 ?>

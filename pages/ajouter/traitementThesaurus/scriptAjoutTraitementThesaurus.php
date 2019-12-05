@@ -1,33 +1,40 @@
 <?php session_start(); 
 
-require "../../../tools/functionsPrint.php";
-require "../../../tools/functionsParams.php";
-getStart(3);
-require "../../../tools/connect.php";
+require "../../../tools/functionsPrint.php"; // affichage de la page html
+require "../../../tools/functionsParams.php"; // utilisation fonctions liés au paramètre (vérification...)
+getStart(3); // appel de toutes les fonctions indispensables au fonctionnement de la page et du script
+require "../../../tools/connect.php"; // connexion à la base
 
 
 $mesParams = verifParams("ajoutTraitThs",$_GET);
 		if($mesParams[0]==0){//parametre manquant
-			'<aside class="alert alert-warning alertParam container-fluid " role="alert">
-					<p class="display-4"> Parametre manquant. <a href="#'.$mesParams[2].'"> Voir le paramètre manquant</a>
-						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			print '<aside class="alert alert-warning " role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 							<span aria-hidden="true" class="display-4">&times;</span>
 						</button>
-					</p>
+					<p> Oups... le paramètre est manquant</p>
+					<a href = "../../ajouter/traitementThesaurus/formAjoutTraitementThesaurus.php">Retour au formulaire</a>
 				</aside>'
 			;
 		}
 		else if($mesParams[0]==2){//parametre invalide
-			echo $mesParams[1];
+			print '<aside class="alert alert-warning " role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true" class="display-4">&times;</span>
+						</button>
+					<p> Oups... le paramètre est invalide</p>
+					<a href = "../../ajouter/traitementThesaurus/formAjoutTraitementThesaurus.php">Retour au formulaire</a>
+				</aside>'
+			;
 		}
 		else if($mesParams[0]==1 and isset($_SESSION['coco'])){//parametres bons et connecté à une session
-			//print implode(" _ ",$mesParams);
+			
 
 			$requete = "INSERT INTO ths_traitement (LIBELLETTT) VALUES (:tttadd)";
 			$req = $bdd->prepare($requete);
 
 
-			try {
+			try { // ajout try/catch pour mettre en avant toute erreur dans l'échange avec la base
 				$req->execute(array(':tttadd' => $_GET['treatadd']));
 
 				print'
@@ -40,7 +47,7 @@ $mesParams = verifParams("ajoutTraitThs",$_GET);
 				<hr>
 				<a href="../../ajouter/traitementThesaurus/formAjoutTraitementThesaurus.php"> Retour au formulaire </a>
 				</article>
-				';
+				'; 
 
 			} catch (PDOException $e){
 				print'
@@ -57,7 +64,7 @@ $mesParams = verifParams("ajoutTraitThs",$_GET);
 			}
 
 			$req->closeCursor();
-		} else {
+		} else { //
 			print'
 
 			<article class="alert alert-warning" role="alert">
