@@ -7,7 +7,7 @@
 
 # projet_MGM
 
-Projet dans le cadre de l'UE INF204,  consistant en une interface web permettant de visualiser et de gérer des données issue d'une cohorte.
+Projet dans le cadre de l'UE INF204,  consistant en une interface web permettant de visualiser et de gérer des données issues d'une cohorte.
 
 ### Prérequis
  Serveur Apache >2.2<br/>
